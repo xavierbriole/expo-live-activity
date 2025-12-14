@@ -51,6 +51,11 @@ export default function CreateLiveActivityScreen() {
   const [paddingRight, setPaddingRight] = useState('')
   const [paddingVertical, setPaddingVertical] = useState('')
   const [paddingHorizontal, setPaddingHorizontal] = useState('')
+  const [teamLogoLeft, setTeamLogoLeft] = useState('')
+  const [teamLogoRight, setTeamLogoRight] = useState('')
+  const [teamScoreLeft, setTeamScoreLeft] = useState('')
+  const [teamScoreRight, setTeamScoreRight] = useState('')
+  const [passTeamData, setPassTeamData] = useState(false)
 
   const onChangeProgress = useCallback(
     (text: string) => {
@@ -156,6 +161,10 @@ export default function CreateLiveActivityScreen() {
       progressBar: progressState,
       imageName: passImage ? imageName : undefined,
       dynamicIslandImageName,
+      teamLogoLeft: passTeamData ? teamLogoLeft : undefined,
+      teamLogoRight: passTeamData ? teamLogoRight : undefined,
+      teamScoreLeft: passTeamData ? teamScoreLeft : undefined,
+      teamScoreRight: passTeamData ? teamScoreRight : undefined,
     }
 
     try {
@@ -183,6 +192,10 @@ export default function CreateLiveActivityScreen() {
       },
       imageName,
       dynamicIslandImageName,
+      teamLogoLeft: passTeamData ? teamLogoLeft : undefined,
+      teamLogoRight: passTeamData ? teamLogoRight : undefined,
+      teamScoreLeft: passTeamData ? teamScoreLeft : undefined,
+      teamScoreRight: passTeamData ? teamScoreRight : undefined,
     }
     try {
       activityId && LiveActivity.stopActivity(activityId, state)
@@ -207,6 +220,10 @@ export default function CreateLiveActivityScreen() {
       progressBar: progressState,
       imageName: passImage ? imageName : undefined,
       dynamicIslandImageName,
+      teamLogoLeft: passTeamData ? teamLogoLeft : undefined,
+      teamLogoRight: passTeamData ? teamLogoRight : undefined,
+      teamScoreLeft: passTeamData ? teamScoreLeft : undefined,
+      teamScoreRight: passTeamData ? teamScoreRight : undefined,
     }
     try {
       activityId && LiveActivity.updateActivity(activityId, state)
@@ -235,6 +252,44 @@ export default function CreateLiveActivityScreen() {
           value={subtitle}
           editable={passSubtitle}
         />
+        <View style={styles.labelWithSwitch}>
+          <Text style={styles.label}>Use Team Data (LoL Match):</Text>
+          <Switch onValueChange={() => setPassTeamData(toggle)} value={passTeamData} />
+        </View>
+        {passTeamData && (
+          <>
+            <Text style={styles.label}>Team Left Logo:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setTeamLogoLeft}
+              autoCapitalize="none"
+              placeholder="Left team logo asset name"
+              value={teamLogoLeft}
+            />
+            <Text style={styles.label}>Team Left Score:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setTeamScoreLeft}
+              placeholder="Left team score (e.g., 0)"
+              value={teamScoreLeft}
+            />
+            <Text style={styles.label}>Team Right Logo:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setTeamLogoRight}
+              autoCapitalize="none"
+              placeholder="Right team logo asset name"
+              value={teamLogoRight}
+            />
+            <Text style={styles.label}>Team Right Score:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setTeamScoreRight}
+              placeholder="Right team score (e.g., 0)"
+              value={teamScoreRight}
+            />
+          </>
+        )}
         <View style={styles.labelWithSwitch}>
           <Text testID="input-image-name-label" style={styles.label}>
             Set Live Activity image:

@@ -9,6 +9,10 @@ struct LiveActivityAttributes: ActivityAttributes {
     var progress: Double?
     var imageName: String?
     var dynamicIslandImageName: String?
+    var teamLogoLeft: String?
+    var teamLogoRight: String?
+    var teamScoreLeft: String?
+    var teamScoreRight: String?
   }
 
   var name: String

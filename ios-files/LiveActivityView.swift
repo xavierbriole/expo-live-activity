@@ -187,48 +187,65 @@ import WidgetKit
         let isLeftImage = position.hasPrefix("left")
         let hasImage = contentState.imageName != nil
         let effectiveStretch = isStretch && hasImage
+        let hasTeamLogos = contentState.teamLogoLeft != nil || contentState.teamLogoRight != nil
 
-        HStack(alignment: .center) {
-          if hasImage, isLeftImage {
-            if let imageName = contentState.imageName {
-              alignedImage(imageName: imageName)
-            }
-          }
-
-          VStack(alignment: .leading, spacing: 2) {
-            Text(contentState.title)
-              .font(.title2)
-              .fontWeight(.semibold)
-              .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
-
-            if let subtitle = contentState.subtitle {
-              Text(subtitle)
-                .font(.title3)
-                .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
-            }
-
-            if effectiveStretch {
-              if let date = contentState.timerEndDateInMilliseconds {
-                ProgressView(timerInterval: Date.toTimerInterval(miliseconds: date))
-                  .tint(progressViewTint)
-                  .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
-              } else if let progress = contentState.progress {
-                ProgressView(value: progress)
-                  .tint(progressViewTint)
-                  .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
+        if hasTeamLogos {
+          // League of Legends match layout with team logos and scores
+          HStack(alignment: .center, spacing: 12) {
+            // Left team logo and score
+            if let leftLogo = contentState.teamLogoLeft {
+              HStack(spacing: 6) {
+                Image.dynamic(assetNameOrPath: leftLogo)
+                  .resizable()
+                  .scaledToFit()
+                  .frame(width: 40, height: 40)
+                if let leftScore = contentState.teamScoreLeft {
+                  Text(leftScore)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
+                }
               }
             }
-          }.layoutPriority(1)
-
-          if hasImage, !isLeftImage { // right side (default)
+            
             Spacer()
-            if let imageName = contentState.imageName {
-              alignedImage(imageName: imageName)
+            
+            // Centered title and subtitle
+            VStack(alignment: .center, spacing: 2) {
+              Text(contentState.title)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
+                .multilineTextAlignment(.center)
+              
+              if let subtitle = contentState.subtitle {
+                Text(subtitle)
+                  .font(.subheadline)
+                  .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+                  .multilineTextAlignment(.center)
+              }
+            }
+            
+            Spacer()
+            
+            // Right team score and logo
+            if let rightLogo = contentState.teamLogoRight {
+              HStack(spacing: 6) {
+                if let rightScore = contentState.teamScoreRight {
+                  Text(rightScore)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
+                }
+                Image.dynamic(assetNameOrPath: rightLogo)
+                  .resizable()
+                  .scaledToFit()
+                  .frame(width: 40, height: 40)
+              }
             }
           }
-        }
-
-        if !effectiveStretch {
+          
+          // Progress bar below if present
           if let date = contentState.timerEndDateInMilliseconds {
             ProgressView(timerInterval: Date.toTimerInterval(miliseconds: date))
               .tint(progressViewTint)
@@ -237,6 +254,59 @@ import WidgetKit
             ProgressView(value: progress)
               .tint(progressViewTint)
               .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
+          }
+        } else {
+          // Original layout for backward compatibility
+          HStack(alignment: .center) {
+            if hasImage, isLeftImage {
+              if let imageName = contentState.imageName {
+                alignedImage(imageName: imageName)
+              }
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+              Text(contentState.title)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
+
+              if let subtitle = contentState.subtitle {
+                Text(subtitle)
+                  .font(.title3)
+                  .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+              }
+
+              if effectiveStretch {
+                if let date = contentState.timerEndDateInMilliseconds {
+                  ProgressView(timerInterval: Date.toTimerInterval(miliseconds: date))
+                    .tint(progressViewTint)
+                    .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
+                } else if let progress = contentState.progress {
+                  ProgressView(value: progress)
+                    .tint(progressViewTint)
+                    .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
+                }
+              }
+            }.layoutPriority(1)
+
+            if hasImage, !isLeftImage { // right side (default)
+              Spacer()
+              if let imageName = contentState.imageName {
+                alignedImage(imageName: imageName)
+              }
+            }
+          }
+
+          if !effectiveStretch {
+            if let date = contentState.timerEndDateInMilliseconds {
+              ProgressView(timerInterval: Date.toTimerInterval(miliseconds: date))
+                .tint(progressViewTint)
+                .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
+            } else if let progress = contentState.progress {
+              ProgressView(value: progress)
+                .tint(progressViewTint)
+                .modifier(ConditionalForegroundViewModifier(color: attributes.progressViewLabelColor))
+            }
           }
         }
       }

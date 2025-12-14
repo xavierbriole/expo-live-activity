@@ -25,6 +25,18 @@ public class ExpoLiveActivityModule: Module {
 
     @Field
     var dynamicIslandImageName: String?
+
+    @Field
+    var teamLogoLeft: String?
+
+    @Field
+    var teamLogoRight: String?
+
+    @Field
+    var teamScoreLeft: String?
+
+    @Field
+    var teamScoreRight: String?
   }
 
   struct LiveActivityConfig: Record {
@@ -135,6 +147,14 @@ public class ExpoLiveActivityModule: Module {
 
     if let name = state.dynamicIslandImageName {
       newState.dynamicIslandImageName = try await resolveImage(from: name)
+    }
+
+    if let name = state.teamLogoLeft {
+      newState.teamLogoLeft = try await resolveImage(from: name)
+    }
+
+    if let name = state.teamLogoRight {
+      newState.teamLogoRight = try await resolveImage(from: name)
     }
   }
 
@@ -256,7 +276,9 @@ public class ExpoLiveActivityModule: Module {
           title: state.title,
           subtitle: state.subtitle,
           timerEndDateInMilliseconds: state.progressBar?.date,
-          progress: state.progressBar?.progress
+          progress: state.progressBar?.progress,
+          teamScoreLeft: state.teamScoreLeft,
+          teamScoreRight: state.teamScoreRight
         )
 
         let activity = try Activity.request(
@@ -292,7 +314,9 @@ public class ExpoLiveActivityModule: Module {
           title: state.title,
           subtitle: state.subtitle,
           timerEndDateInMilliseconds: state.progressBar?.date,
-          progress: state.progressBar?.progress
+          progress: state.progressBar?.progress,
+          teamScoreLeft: state.teamScoreLeft,
+          teamScoreRight: state.teamScoreRight
         )
         try await updateImages(state: state, newState: &newState)
         await activity.end(
@@ -319,7 +343,9 @@ public class ExpoLiveActivityModule: Module {
           title: state.title,
           subtitle: state.subtitle,
           timerEndDateInMilliseconds: state.progressBar?.date,
-          progress: state.progressBar?.progress
+          progress: state.progressBar?.progress,
+          teamScoreLeft: state.teamScoreLeft,
+          teamScoreRight: state.teamScoreRight
         )
         try await updateImages(state: state, newState: &newState)
         await activity.update(ActivityContent(state: newState, staleDate: nil))
