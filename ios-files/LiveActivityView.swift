@@ -191,6 +191,7 @@ import WidgetKit
 
         if hasTeamLogos {
           // League of Legends match layout with team logos and scores
+          // Note: Either or both team logos can be provided. Scores are optional for each team.
           HStack(alignment: .center, spacing: 12) {
             // Left team logo and score
             if let leftLogo = contentState.teamLogoLeft {
