@@ -1,9 +1,12 @@
 {
-  "name": "expo-live-activity",
+  "name": "@xavierbriole/expo-live-activity",
   "version": "0.2.1",
   "description": "A module for adding Live Activity to a React Native app for iOS.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "build": "expo-module build",
     "clean": "expo-module clean",
@@ -33,12 +36,12 @@
     "Anna Olak <anna.olak@swmansion.com> (https://github.com/anna1901)",
     "Artur Bilski <artur.bilski@swmansion.com> (https://github.com/arthwood)"
   ],
-  "repository": "https://github.com/software-mansion-labs/expo-live-activity",
+  "repository": "https://github.com/xavierbriole/expo-live-activity",
   "bugs": {
-    "url": "https://github.com/software-mansion-labs/expo-live-activity/issues"
+    "url": "https://github.com/xavierbriole/expo-live-activity/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/software-mansion-labs/expo-live-activity#readme",
+  "homepage": "https://github.com/xavierbriole/expo-live-activity#readme",
   "devDependencies": {
     "@types/react": "~19.1.0",
     "eslint": "^9.33.0",
