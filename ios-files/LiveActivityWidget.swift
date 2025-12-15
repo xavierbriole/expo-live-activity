@@ -5,26 +5,29 @@ import WidgetKit
 public struct LiveActivityAttributes: ActivityAttributes {
   public struct ContentState: Codable, Hashable {
     var title: String
-    var subtitle: String?
-    var teamLogoLeft: String?
-    var teamLogoRight: String?
-    var teamScoreLeft: String?
-    var teamScoreRight: String?
-    var teamNameLeft: String?
-    var teamNameRight: String?
+    var subtitle: String
+    var matchType: String?
+    var teamLogoLeft: String
+    var teamLogoRight: String
+    var teamScoreLeft: String
+    var teamScoreRight: String
+    var teamNameLeft: String
+    var teamNameRight: String
 
     public init(
       title: String,
-      subtitle: String? = nil,
-      teamLogoLeft: String? = nil,
-      teamLogoRight: String? = nil,
-      teamScoreLeft: String? = nil,
-      teamScoreRight: String? = nil,
-      teamNameLeft: String? = nil,
-      teamNameRight: String? = nil
+      subtitle: String,
+      matchType: String? = nil,
+      teamLogoLeft: String,
+      teamLogoRight: String,
+      teamScoreLeft: String,
+      teamScoreRight: String,
+      teamNameLeft: String,
+      teamNameRight: String
     ) {
       self.title = title
       self.subtitle = subtitle
+      self.matchType = matchType
       self.teamLogoLeft = teamLogoLeft
       self.teamLogoRight = teamLogoRight
       self.teamScoreLeft = teamScoreLeft
