@@ -107,43 +107,43 @@ public struct LiveActivityWidget: Widget {
         }
       } compactLeading: {
         if let leftLogo = context.state.teamLogoLeft {
-          resizableImage(imageName: leftLogo)
-            .frame(maxWidth: 23, maxHeight: 23)
-            .background(
-              Circle()
-                .fill(.white)
-                .frame(width: 26, height: 26)
-            )
-            .applyWidgetURL(from: context.attributes.deepLinkUrl)
+          ZStack {
+            Circle()
+              .fill(.white)
+              .frame(width: 26, height: 26)
+            resizableImage(imageName: leftLogo)
+              .frame(width: 23, height: 23)
+          }
+          .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
       } compactTrailing: {
         if let rightLogo = context.state.teamLogoRight {
-          resizableImage(imageName: rightLogo)
-            .frame(maxWidth: 23, maxHeight: 23)
-            .background(
-              Circle()
-                .fill(.white)
-                .frame(width: 26, height: 26)
-            )
-            .applyWidgetURL(from: context.attributes.deepLinkUrl)
+          ZStack {
+            Circle()
+              .fill(.white)
+              .frame(width: 26, height: 26)
+            resizableImage(imageName: rightLogo)
+              .frame(width: 23, height: 23)
+          }
+          .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
       } minimal: {
         if let leftLogo = context.state.teamLogoLeft, let rightLogo = context.state.teamLogoRight {
           VStack(spacing: 2) {
-            resizableImage(imageName: leftLogo)
-              .frame(maxWidth: 16, maxHeight: 16)
-              .background(
-                Circle()
-                  .fill(.white)
-                  .frame(width: 18, height: 18)
-              )
-            resizableImage(imageName: rightLogo)
-              .frame(maxWidth: 16, maxHeight: 16)
-              .background(
-                Circle()
-                  .fill(.white)
-                  .frame(width: 18, height: 18)
-              )
+            ZStack {
+              Circle()
+                .fill(.white)
+                .frame(width: 18, height: 18)
+              resizableImage(imageName: leftLogo)
+                .frame(width: 16, height: 16)
+            }
+            ZStack {
+              Circle()
+                .fill(.white)
+                .frame(width: 18, height: 18)
+              resizableImage(imageName: rightLogo)
+                .frame(width: 16, height: 16)
+            }
           }
           .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
@@ -158,15 +158,15 @@ public struct LiveActivityWidget: Widget {
     teamName: String?,
     teamScore: String?
   ) -> some View {
-    HStack(alignment: .center, spacing: 8) {
+    VStack(spacing: 8) {
       VStack(spacing: 4) {
-        resizableImage(imageName: teamLogo)
-          .frame(width: 30, height: 30)
-          .background(
-            Circle()
-              .fill(.white)
-              .frame(width: 34, height: 34)
-          )
+        ZStack {
+          Circle()
+            .fill(.white)
+            .frame(width: 34, height: 34)
+          resizableImage(imageName: teamLogo)
+            .frame(width: 30, height: 30)
+        }
         if let name = teamName {
           Text(name)
             .font(.caption)
@@ -187,26 +187,26 @@ public struct LiveActivityWidget: Widget {
     teamName: String?,
     teamScore: String?
   ) -> some View {
-    HStack(alignment: .center, spacing: 8) {
-      if let score = teamScore {
-        Text(score)
-          .font(.title)
-          .fontWeight(.bold)
-          .foregroundStyle(.white)
-      }
+    VStack(spacing: 8) {
       VStack(spacing: 4) {
-        resizableImage(imageName: teamLogo)
-          .frame(width: 30, height: 30)
-          .background(
-            Circle()
-              .fill(.white)
-              .frame(width: 34, height: 34)
-          )
+        ZStack {
+          Circle()
+            .fill(.white)
+            .frame(width: 34, height: 34)
+          resizableImage(imageName: teamLogo)
+            .frame(width: 30, height: 30)
+        }
         if let name = teamName {
           Text(name)
             .font(.caption)
             .foregroundStyle(.white.opacity(0.75))
         }
+      }
+      if let score = teamScore {
+        Text(score)
+          .font(.title)
+          .fontWeight(.bold)
+          .foregroundStyle(.white)
       }
     }
   }
