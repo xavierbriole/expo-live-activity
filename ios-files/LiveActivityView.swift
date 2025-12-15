@@ -43,13 +43,11 @@ import WidgetKit
       let padding = CGFloat(defaultPadding)
 
       VStack(spacing: 8) {
-        // Match type label at the top (e.g., "Best of 5")
-        Text(contentState.matchType)
+        Text(contentState.caption)
           .font(.caption)
           .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
         
         HStack(alignment: .center, spacing: 8) {
-        // Left team logo and name
         VStack(spacing: 4) {
           Image.dynamic(assetNameOrPath: contentState.teamLogoLeft)
             .resizable()
@@ -61,7 +59,6 @@ import WidgetKit
             .multilineTextAlignment(.center)
         }
         
-        // Left team score
         Text(contentState.teamScoreLeft)
           .font(.title)
           .fontWeight(.bold)
@@ -69,7 +66,6 @@ import WidgetKit
         
         Spacer()
         
-        // Centered title and subtitle
         VStack(alignment: .center, spacing: 2) {
           Text(contentState.title)
             .font(.headline)
@@ -85,13 +81,11 @@ import WidgetKit
         
         Spacer()
         
-        // Right team score
         Text(contentState.teamScoreRight)
           .font(.title)
           .fontWeight(.bold)
           .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
         
-        // Right team logo and name
         VStack(spacing: 4) {
           Image.dynamic(assetNameOrPath: contentState.teamLogoRight)
             .resizable()

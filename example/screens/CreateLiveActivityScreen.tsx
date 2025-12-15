@@ -5,15 +5,15 @@ import { Button, Keyboard, ScrollView, StyleSheet, Text, TextInput, View } from 
 
 export default function CreateLiveActivityScreen() {
   const [activityId, setActivityID] = useState<string | null>()
-  const [title, setTitle] = useState('LEC Week 1')
+  const [caption, setCaption] = useState('LEC Week 1')
+  const [title, setTitle] = useState('BO5')
   const [subtitle, setSubtitle] = useState('Game 1 in progress')
-  const [matchType, setMatchType] = useState('Best of 5')
-  const [teamLogoLeft, setTeamLogoLeft] = useState('team-left')
-  const [teamLogoRight, setTeamLogoRight] = useState('team-right')
+  const [teamLogoLeft, setTeamLogoLeft] = useState('t1')
+  const [teamLogoRight, setTeamLogoRight] = useState('g2')
   const [teamScoreLeft, setTeamScoreLeft] = useState('0')
   const [teamScoreRight, setTeamScoreRight] = useState('0')
-  const [teamNameLeft, setTeamNameLeft] = useState('Team Left')
-  const [teamNameRight, setTeamNameRight] = useState('Team Right')
+  const [teamNameLeft, setTeamNameLeft] = useState('T1')
+  const [teamNameRight, setTeamNameRight] = useState('G2')
 
   const activityIdState = activityId ? `Activity ID: ${activityId}` : 'No active activity'
   console.log(activityIdState)
@@ -21,9 +21,9 @@ export default function CreateLiveActivityScreen() {
   const startActivity = () => {
     Keyboard.dismiss()
     const state: LiveActivityState = {
+      caption,
       title,
       subtitle,
-      matchType,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -42,9 +42,9 @@ export default function CreateLiveActivityScreen() {
 
   const stopActivity = () => {
     const state: LiveActivityState = {
+      caption,
       title,
       subtitle,
-      matchType,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -62,9 +62,9 @@ export default function CreateLiveActivityScreen() {
 
   const updateActivity = () => {
     const state: LiveActivityState = {
+      caption,
       title,
       subtitle,
-      matchType,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -82,59 +82,32 @@ export default function CreateLiveActivityScreen() {
   return (
     <ScrollView style={styles.scroll}>
       <View style={styles.container}>
-        <Text style={styles.header}>League of Legends Live Activity</Text>
+        <Text style={styles.header}>Live Activity</Text>
 
-        <Text style={styles.label}>Match Title:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setTitle}
-          placeholder="e.g., LEC Week 1"
-          value={title}
-          testID="input-title"
-        />
+        <View style={styles.section}>
+          <Text style={styles.label}>Caption:</Text>
+          <TextInput style={styles.input} onChangeText={setCaption} value={caption} testID="input-caption" />
 
-        <Text style={styles.label}>Match Subtitle:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setSubtitle}
-          placeholder="e.g., Game 1 in progress"
-          value={subtitle}
-          testID="input-subtitle"
-        />
+          <Text style={styles.label}>Title:</Text>
+          <TextInput style={styles.input} onChangeText={setTitle} value={title} testID="input-title" />
 
-        <Text style={styles.label}>Match Type (optional):</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setMatchType}
-          placeholder="e.g., Best of 5 (leave empty for Bo1)"
-          value={matchType}
-        />
+          <Text style={styles.label}>Subtitle:</Text>
+          <TextInput style={styles.input} onChangeText={setSubtitle} value={subtitle} testID="input-subtitle" />
+        </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Left Team</Text>
 
           <Text style={styles.label}>Team Logo (asset name):</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setTeamLogoLeft}
-            placeholder="e.g., fnatic-logo"
-            value={teamLogoLeft}
-            autoCapitalize="none"
-          />
+          <TextInput style={styles.input} onChangeText={setTeamLogoLeft} value={teamLogoLeft} autoCapitalize="none" />
 
           <Text style={styles.label}>Team Name:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setTeamNameLeft}
-            placeholder="e.g., Fnatic"
-            value={teamNameLeft}
-          />
+          <TextInput style={styles.input} onChangeText={setTeamNameLeft} value={teamNameLeft} />
 
           <Text style={styles.label}>Score:</Text>
           <TextInput
             style={styles.input}
             onChangeText={setTeamScoreLeft}
-            placeholder="0"
             value={teamScoreLeft}
             keyboardType="number-pad"
           />
@@ -144,27 +117,15 @@ export default function CreateLiveActivityScreen() {
           <Text style={styles.sectionTitle}>Right Team</Text>
 
           <Text style={styles.label}>Team Logo (asset name):</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setTeamLogoRight}
-            placeholder="e.g., g2-logo"
-            value={teamLogoRight}
-            autoCapitalize="none"
-          />
+          <TextInput style={styles.input} onChangeText={setTeamLogoRight} value={teamLogoRight} autoCapitalize="none" />
 
           <Text style={styles.label}>Team Name:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setTeamNameRight}
-            placeholder="e.g., G2 Esports"
-            value={teamNameRight}
-          />
+          <TextInput style={styles.input} onChangeText={setTeamNameRight} value={teamNameRight} />
 
           <Text style={styles.label}>Score:</Text>
           <TextInput
             style={styles.input}
             onChangeText={setTeamScoreRight}
-            placeholder="0"
             value={teamScoreRight}
             keyboardType="number-pad"
           />
@@ -174,7 +135,18 @@ export default function CreateLiveActivityScreen() {
           <Button
             title="Start Activity"
             onPress={startActivity}
-            disabled={title === '' || !!activityId}
+            disabled={
+              caption === '' ||
+              title === '' ||
+              subtitle === '' ||
+              teamLogoLeft === '' ||
+              teamLogoRight === '' ||
+              teamScoreLeft === '' ||
+              teamScoreRight === '' ||
+              teamNameLeft === '' ||
+              teamNameRight === '' ||
+              !!activityId
+            }
             testID="btn-start-activity"
           />
           <Button title="Stop Activity" onPress={stopActivity} disabled={!activityId} />

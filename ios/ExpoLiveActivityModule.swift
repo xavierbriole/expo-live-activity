@@ -4,13 +4,13 @@ import ExpoModulesCore
 public class ExpoLiveActivityModule: Module {
   struct LiveActivityState: Record {
     @Field
+    var caption: String
+
+    @Field
     var title: String
 
     @Field
     var subtitle: String
-
-    @Field
-    var matchType: String
 
     @Field
     var teamLogoLeft: String
@@ -181,9 +181,9 @@ public class ExpoLiveActivityModule: Module {
         )
 
         let initialState = LiveActivityAttributes.ContentState(
+          caption: state.caption,
           title: state.title,
           subtitle: state.subtitle,
-          matchType: state.matchType,
           teamLogoLeft: state.teamLogoLeft,
           teamLogoRight: state.teamLogoRight,
           teamScoreLeft: state.teamScoreLeft,
@@ -222,9 +222,9 @@ public class ExpoLiveActivityModule: Module {
       Task {
         print("Stopping activity with id: \(activityId)")
         var newState = LiveActivityAttributes.ContentState(
+          caption: state.caption,
           title: state.title,
           subtitle: state.subtitle,
-          matchType: state.matchType,
           teamLogoLeft: state.teamLogoLeft,
           teamLogoRight: state.teamLogoRight,
           teamScoreLeft: state.teamScoreLeft,
@@ -254,9 +254,9 @@ public class ExpoLiveActivityModule: Module {
       Task {
         print("Updating activity with id: \(activityId)")
         var newState = LiveActivityAttributes.ContentState(
+          caption: state.caption,
           title: state.title,
           subtitle: state.subtitle,
-          matchType: state.matchType,
           teamLogoLeft: state.teamLogoLeft,
           teamLogoRight: state.teamLogoRight,
           teamScoreLeft: state.teamScoreLeft,

@@ -29,7 +29,7 @@
 Run the following command to add the expo-live-activity module to your project:
 
 ```sh
-npm install expo-live-activity
+npx expo install @xavierbriole/expo-live-activity
 ```
 
 ### Step 2: Config Plugin Setup
@@ -40,7 +40,7 @@ The module comes with a built-in config plugin that creates a target in iOS with
    ```json
    {
      "expo": {
-       "plugins": ["expo-live-activity"]
+       "plugins": ["@xavierbriole/expo-live-activity"]
      }
    }
    ```
@@ -50,7 +50,7 @@ The module comes with a built-in config plugin that creates a target in iOS with
      "expo": {
        "plugins": [
          [
-           "expo-live-activity",
+           "@xavierbriole/expo-live-activity",
            {
              "enablePushNotifications": true
            }
@@ -76,7 +76,7 @@ The module comes with a built-in config plugin that creates a target in iOS with
 Import the functionalities provided by the `expo-live-activity` module in your JavaScript or TypeScript files:
 
 ```javascript
-import * as LiveActivity from 'expo-live-activity'
+import * as LiveActivity from '@xavierbriole/expo-live-activity'
 ```
 
 ## API
@@ -118,7 +118,7 @@ export default function App() {
 
 // Then start the activity with:
 LiveActivity.startActivity(state, {
-  deepLinkUrl: '/order',
+  deepLinkUrl: '/match',
 })
 ```
 
@@ -130,15 +130,16 @@ The `state` object should include:
 
 ```typescript
 {
-  title: string;
-  subtitle?: string;
-  progressBar: { // Only one property, either date or progress, is available at a time as they share a single progress bar component
-    date?: number; // Set as epoch time in milliseconds. This is used as an end date in a timer.
-    progress?: number; //Set amount of progress in the progress bar
-  };
-  imageName?: string; // Matches the name of the image in 'assets/liveActivity'
-  dynamicIslandImageName?: string; // Matches the name of the image in 'assets/liveActivity'
-};
+  caption: string
+  title: string
+  subtitle: string
+  teamLogoLeft: string
+  teamLogoRight: string
+  teamScoreLeft: string
+  teamScoreRight: string
+  teamNameLeft: string
+  teamNameRight: string
+}
 ```
 
 ### Config Object Structure
@@ -150,15 +151,7 @@ The `config` object should include:
    backgroundColor?: string;
    titleColor?: string;
    subtitleColor?: string;
-   progressViewTint?: string;
-   progressViewLabelColor?: string;
    deepLinkUrl?: string;
-   timerType?: DynamicIslandTimerType; // "circular" | "digital" - defines timer appearance on the dynamic island
-   padding?: Padding // number | {top?: number bottom?: number ...}
-   imagePosition?: ImagePosition; // 'left' | 'right';
-   imageAlign?: ImageAlign; // 'top' | 'center' | 'bottom'
-   imageSize?: ImageSize // { width: number|`${number}%`, height: number|`${number}%` } | undefined (defaults to 64pt)
-   contentFit?: ImageContentFit; // 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'
 };
 ```
 
@@ -172,28 +165,22 @@ Managing a Live Activity:
 
 ```typescript
 const state: LiveActivity.LiveActivityState = {
-  title: 'Title',
-  subtitle: 'This is a subtitle',
-  progressBar: {
-    date: new Date(Date.now() + 60 * 1000 * 5).getTime(),
-  },
-  imageName: 'live_activity_image',
-  dynamicIslandImageName: 'dynamic_island_image',
+  caption: 'LEC Week 1',
+  title: 'BO5',
+  subtitle: 'Game 1 in progress',
+  teamLogoLeft: 't1', // name of the image in assets/liveActivity folder
+  teamLogoRight: 'g2', // name of the image in assets/liveActivity folder
+  teamScoreLeft: '2',
+  teamScoreRight: '3',
+  teamNameLeft: 'T1',
+  teamNameRight: 'G2',
 }
 
 const config: LiveActivity.LiveActivityConfig = {
   backgroundColor: '#FFFFFF',
   titleColor: '#000000',
   subtitleColor: '#333333',
-  progressViewTint: '#4CAF50',
-  progressViewLabelColor: '#FFFFFF',
-  deepLinkUrl: '/dashboard',
-  timerType: 'circular',
-  padding: { horizontal: 20, top: 16, bottom: 16 },
-  imagePosition: 'right',
-  imageAlign: 'center',
-  imageSize: { height: '50%', width: '50%' }, // number (pt) or percentage of the image container, if empty by default is 64pt.
-  contentFit: 'cover',
+  deepLinkUrl: '/match',
 }
 
 const activityId = LiveActivity.startActivity(state, config)
@@ -241,27 +228,24 @@ Example payload for starting Live Activity:
   "aps": {
     "event": "start",
     "content-state": {
-      "title": "Live Activity title!",
-      "subtitle": "Live Activity subtitle.",
-      "timerEndDateInMilliseconds": 1754410997000,
-      "progress": 0.5,
-      "imageName": "live_activity_image",
-      "dynamicIslandImageName": "dynamic_island_image"
+      "caption": "LEC Week 1",
+      "title": "BO5",
+      "subtitle": "Game 1 in progress",
+      "teamLogoLeft": "t1",
+      "teamLogoRight": "g2",
+      "teamScoreLeft": "2",
+      "teamScoreRight": "3",
+      "teamNameLeft": "T1",
+      "teamNameRight": "G2"
     },
     "timestamp": 1754491435000, // timestamp of when the push notification was sent
     "attributes-type": "LiveActivityAttributes",
     "attributes": {
-      "name": "Test",
+      "name": "1839783", // matchId
       "backgroundColor": "001A72",
       "titleColor": "EBEBF0",
       "subtitleColor": "FFFFFF75",
-      "progressViewTint": "38ACDD",
-      "progressViewLabelColor": "FFFFFF",
-      "deepLinkUrl": "/dashboard",
-      "timerType": "digital",
-      "padding": 24, // or use object to control each side: { "horizontal": 20, "top": 16, "bottom": 16 }
-      "imagePosition": "right",
-      "imageSize": "default"
+      "deepLinkUrl": "/match"
     },
     "alert": {
       "title": "",
@@ -279,30 +263,20 @@ Example payload for updating Live Activity:
   "aps": {
     "event": "update",
     "content-state": {
-      "title": "Hello",
-      "subtitle": "World",
-      "timerEndDateInMilliseconds": 1754064245000,
-      "imageName": "live_activity_image",
-      "dynamicIslandImageName": "dynamic_island_image"
+      "caption": "LEC Week 1",
+      "title": "BO5",
+      "subtitle": "T1 won game 1 in 17:32",
+      "teamLogoLeft": "t1",
+      "teamLogoRight": "g2",
+      "teamScoreLeft": "2",
+      "teamScoreRight": "3",
+      "teamNameLeft": "T1",
+      "teamNameRight": "G2"
     },
     "timestamp": 1754063621319 // timestamp of when the push notification was sent
   }
 }
 ```
-
-Where `timerEndDateInMilliseconds` value is a timestamp in milliseconds corresponding to the target point of the counter displayed in Live Activity view.
-
-## Image support
-
-Live Activity view also supports image display. There are two dedicated fields in the `state` object for that:
-
-- `imageName`
-- `dynamicIslandImageName`
-
-The value of each field can be:
-
-- a string which maps to an asset name
-- a URL to remote image - currently, it's possible to use this option only via API, but we plan on to add that feature to push notifications as well. It also requires adding "App Groups" capability to both "main app" and "Live Activity" targets.
 
 ## expo-live-activity is created by Software Mansion
 

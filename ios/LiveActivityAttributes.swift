@@ -3,9 +3,9 @@ import Foundation
 
 struct LiveActivityAttributes: ActivityAttributes {
   struct ContentState: Codable, Hashable {
+    var caption: String
     var title: String
     var subtitle: String
-    var matchType: String
     var teamLogoLeft: String
     var teamLogoRight: String
     var teamScoreLeft: String

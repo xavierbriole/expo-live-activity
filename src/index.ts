@@ -6,9 +6,9 @@ import ExpoLiveActivityModule from './ExpoLiveActivityModule'
 type Voidable<T> = T | void
 
 export type LiveActivityState = {
+  caption: string
   title: string
   subtitle: string
-  matchType: string
   teamLogoLeft: string
   teamLogoRight: string
   teamScoreLeft: string
@@ -18,9 +18,9 @@ export type LiveActivityState = {
 }
 
 export type NativeLiveActivityState = {
+  caption: string
   title: string
   subtitle: string
-  matchType: string
   teamLogoLeft: string
   teamLogoRight: string
   teamScoreLeft: string

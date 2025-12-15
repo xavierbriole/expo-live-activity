@@ -4,9 +4,9 @@ import WidgetKit
 
 public struct LiveActivityAttributes: ActivityAttributes {
   public struct ContentState: Codable, Hashable {
+    var caption: String
     var title: String
     var subtitle: String
-    var matchType: String
     var teamLogoLeft: String
     var teamLogoRight: String
     var teamScoreLeft: String
@@ -15,9 +15,9 @@ public struct LiveActivityAttributes: ActivityAttributes {
     var teamNameRight: String
 
     public init(
+      caption: String,
       title: String,
       subtitle: String,
-      matchType: String,
       teamLogoLeft: String,
       teamLogoRight: String,
       teamScoreLeft: String,
@@ -25,9 +25,9 @@ public struct LiveActivityAttributes: ActivityAttributes {
       teamNameLeft: String,
       teamNameRight: String
     ) {
+      self.caption = caption
       self.title = title
       self.subtitle = subtitle
-      self.matchType = matchType
       self.teamLogoLeft = teamLogoLeft
       self.teamLogoRight = teamLogoRight
       self.teamScoreLeft = teamScoreLeft
