@@ -83,13 +83,8 @@ public class ExpoLiveActivityModule: Module {
   private func updateImages(
     state: LiveActivityState, newState: inout LiveActivityAttributes.ContentState
   ) async throws {
-    if let name = state.teamLogoLeft {
-      newState.teamLogoLeft = try await resolveImage(from: name)
-    }
-
-    if let name = state.teamLogoRight {
-      newState.teamLogoRight = try await resolveImage(from: name)
-    }
+    newState.teamLogoLeft = try await resolveImage(from: state.teamLogoLeft)
+    newState.teamLogoRight = try await resolveImage(from: state.teamLogoRight)
   }
 
   private func observePushToStartToken() {
@@ -189,6 +184,8 @@ public class ExpoLiveActivityModule: Module {
           title: state.title,
           subtitle: state.subtitle,
           matchType: state.matchType,
+          teamLogoLeft: state.teamLogoLeft,
+          teamLogoRight: state.teamLogoRight,
           teamScoreLeft: state.teamScoreLeft,
           teamScoreRight: state.teamScoreRight,
           teamNameLeft: state.teamNameLeft,
@@ -228,6 +225,8 @@ public class ExpoLiveActivityModule: Module {
           title: state.title,
           subtitle: state.subtitle,
           matchType: state.matchType,
+          teamLogoLeft: state.teamLogoLeft,
+          teamLogoRight: state.teamLogoRight,
           teamScoreLeft: state.teamScoreLeft,
           teamScoreRight: state.teamScoreRight,
           teamNameLeft: state.teamNameLeft,
@@ -258,6 +257,8 @@ public class ExpoLiveActivityModule: Module {
           title: state.title,
           subtitle: state.subtitle,
           matchType: state.matchType,
+          teamLogoLeft: state.teamLogoLeft,
+          teamLogoRight: state.teamLogoRight,
           teamScoreLeft: state.teamScoreLeft,
           teamScoreRight: state.teamScoreRight,
           teamNameLeft: state.teamNameLeft,
