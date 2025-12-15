@@ -72,9 +72,7 @@ public struct LiveActivityWidget: Widget {
             dynamicIslandExpandedTeamLeading(
               teamLogo: leftLogo,
               teamName: context.state.teamNameLeft,
-              teamScore: context.state.teamScoreLeft,
-              titleColor: context.attributes.titleColor,
-              subtitleColor: context.attributes.subtitleColor
+              teamScore: context.state.teamScoreLeft
             )
             .dynamicIsland(verticalPlacement: .belowIfTooWide)
             .padding(.leading, 5)
@@ -101,9 +99,7 @@ public struct LiveActivityWidget: Widget {
             dynamicIslandExpandedTeamTrailing(
               teamLogo: rightLogo,
               teamName: context.state.teamNameRight,
-              teamScore: context.state.teamScoreRight,
-              titleColor: context.attributes.titleColor,
-              subtitleColor: context.attributes.subtitleColor
+              teamScore: context.state.teamScoreRight
             )
             .padding(.trailing, 5)
             .applyWidgetURL(from: context.attributes.deepLinkUrl)
@@ -160,9 +156,7 @@ public struct LiveActivityWidget: Widget {
   private func dynamicIslandExpandedTeamLeading(
     teamLogo: String,
     teamName: String?,
-    teamScore: String?,
-    titleColor: String?,
-    subtitleColor: String?
+    teamScore: String?
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
       VStack(spacing: 4) {
@@ -176,7 +170,7 @@ public struct LiveActivityWidget: Widget {
         if let name = teamName {
           Text(name)
             .font(.caption)
-            .foregroundStyle(subtitleColor.map { Color(hex: $0) } ?? .white.opacity(0.75))
+            .foregroundStyle(.white.opacity(0.75))
             .multilineTextAlignment(.center)
         }
       }
@@ -184,7 +178,7 @@ public struct LiveActivityWidget: Widget {
         Text(score)
           .font(.title)
           .fontWeight(.bold)
-          .foregroundStyle(titleColor.map { Color(hex: $0) } ?? .white)
+          .foregroundStyle(.white)
       }
     }
   }
@@ -192,16 +186,14 @@ public struct LiveActivityWidget: Widget {
   private func dynamicIslandExpandedTeamTrailing(
     teamLogo: String,
     teamName: String?,
-    teamScore: String?,
-    titleColor: String?,
-    subtitleColor: String?
+    teamScore: String?
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
       if let score = teamScore {
         Text(score)
           .font(.title)
           .fontWeight(.bold)
-          .foregroundStyle(titleColor.map { Color(hex: $0) } ?? .white)
+          .foregroundStyle(.white)
       }
       VStack(spacing: 4) {
         ZStack {
@@ -214,7 +206,7 @@ public struct LiveActivityWidget: Widget {
         if let name = teamName {
           Text(name)
             .font(.caption)
-            .foregroundStyle(subtitleColor.map { Color(hex: $0) } ?? .white.opacity(0.75))
+            .foregroundStyle(.white.opacity(0.75))
             .multilineTextAlignment(.center)
         }
       }
