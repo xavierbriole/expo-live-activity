@@ -109,12 +109,22 @@ public struct LiveActivityWidget: Widget {
         if let leftLogo = context.state.teamLogoLeft {
           resizableImage(imageName: leftLogo)
             .frame(maxWidth: 23, maxHeight: 23)
+            .background(
+              Circle()
+                .fill(.white)
+                .frame(width: 26, height: 26)
+            )
             .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
       } compactTrailing: {
         if let rightLogo = context.state.teamLogoRight {
           resizableImage(imageName: rightLogo)
             .frame(maxWidth: 23, maxHeight: 23)
+            .background(
+              Circle()
+                .fill(.white)
+                .frame(width: 26, height: 26)
+            )
             .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
       } minimal: {
@@ -122,8 +132,18 @@ public struct LiveActivityWidget: Widget {
           VStack(spacing: 2) {
             resizableImage(imageName: leftLogo)
               .frame(maxWidth: 16, maxHeight: 16)
+              .background(
+                Circle()
+                  .fill(.white)
+                  .frame(width: 18, height: 18)
+              )
             resizableImage(imageName: rightLogo)
               .frame(maxWidth: 16, maxHeight: 16)
+              .background(
+                Circle()
+                  .fill(.white)
+                  .frame(width: 18, height: 18)
+              )
           }
           .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
@@ -138,21 +158,26 @@ public struct LiveActivityWidget: Widget {
     teamName: String?,
     teamScore: String?
   ) -> some View {
-    VStack(alignment: .leading, spacing: 4) {
-      HStack(alignment: .center, spacing: 8) {
+    HStack(alignment: .center, spacing: 8) {
+      VStack(spacing: 4) {
         resizableImage(imageName: teamLogo)
           .frame(width: 30, height: 30)
-        if let score = teamScore {
-          Text(score)
-            .font(.title)
-            .fontWeight(.bold)
-            .foregroundStyle(.white)
+          .background(
+            Circle()
+              .fill(.white)
+              .frame(width: 34, height: 34)
+          )
+        if let name = teamName {
+          Text(name)
+            .font(.caption)
+            .foregroundStyle(.white.opacity(0.75))
         }
       }
-      if let name = teamName {
-        Text(name)
-          .font(.caption)
-          .foregroundStyle(.white.opacity(0.75))
+      if let score = teamScore {
+        Text(score)
+          .font(.title)
+          .fontWeight(.bold)
+          .foregroundStyle(.white)
       }
     }
   }
@@ -162,21 +187,26 @@ public struct LiveActivityWidget: Widget {
     teamName: String?,
     teamScore: String?
   ) -> some View {
-    VStack(alignment: .trailing, spacing: 4) {
-      HStack(alignment: .center, spacing: 8) {
-        if let score = teamScore {
-          Text(score)
-            .font(.title)
-            .fontWeight(.bold)
-            .foregroundStyle(.white)
-        }
+    HStack(alignment: .center, spacing: 8) {
+      if let score = teamScore {
+        Text(score)
+          .font(.title)
+          .fontWeight(.bold)
+          .foregroundStyle(.white)
+      }
+      VStack(spacing: 4) {
         resizableImage(imageName: teamLogo)
           .frame(width: 30, height: 30)
-      }
-      if let name = teamName {
-        Text(name)
-          .font(.caption)
-          .foregroundStyle(.white.opacity(0.75))
+          .background(
+            Circle()
+              .fill(.white)
+              .frame(width: 34, height: 34)
+          )
+        if let name = teamName {
+          Text(name)
+            .font(.caption)
+            .foregroundStyle(.white.opacity(0.75))
+        }
       }
     }
   }

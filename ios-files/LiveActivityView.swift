@@ -42,28 +42,28 @@ import WidgetKit
       let defaultPadding = 16
       let padding = CGFloat(defaultPadding)
 
-      HStack(alignment: .center, spacing: 12) {
-        // Left team logo, score, and name
+      HStack(alignment: .center, spacing: 8) {
+        // Left team logo and name
         if let leftLogo = contentState.teamLogoLeft {
           VStack(spacing: 4) {
-            HStack(spacing: 6) {
-              Image.dynamic(assetNameOrPath: leftLogo)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-              if let leftScore = contentState.teamScoreLeft {
-                Text(leftScore)
-                  .font(.title)
-                  .fontWeight(.bold)
-                  .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
-              }
-            }
+            Image.dynamic(assetNameOrPath: leftLogo)
+              .resizable()
+              .scaledToFit()
+              .frame(width: 40, height: 40)
             if let leftName = contentState.teamNameLeft {
               Text(leftName)
                 .font(.caption)
                 .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
             }
           }
+        }
+        
+        // Left team score
+        if let leftScore = contentState.teamScoreLeft {
+          Text(leftScore)
+            .font(.title)
+            .fontWeight(.bold)
+            .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
         }
         
         Spacer()
@@ -86,21 +86,21 @@ import WidgetKit
         
         Spacer()
         
-        // Right team score, logo, and name
+        // Right team score
+        if let rightScore = contentState.teamScoreRight {
+          Text(rightScore)
+            .font(.title)
+            .fontWeight(.bold)
+            .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
+        }
+        
+        // Right team logo and name
         if let rightLogo = contentState.teamLogoRight {
           VStack(spacing: 4) {
-            HStack(spacing: 6) {
-              if let rightScore = contentState.teamScoreRight {
-                Text(rightScore)
-                  .font(.title)
-                  .fontWeight(.bold)
-                  .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
-              }
-              Image.dynamic(assetNameOrPath: rightLogo)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-            }
+            Image.dynamic(assetNameOrPath: rightLogo)
+              .resizable()
+              .scaledToFit()
+              .frame(width: 40, height: 40)
             if let rightName = contentState.teamNameRight {
               Text(rightName)
                 .font(.caption)
