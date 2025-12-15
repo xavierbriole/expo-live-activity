@@ -7,28 +7,28 @@ public class ExpoLiveActivityModule: Module {
     var title: String
 
     @Field
-    var subtitle: String?
+    var subtitle: String
 
     @Field
     var matchType: String?
 
     @Field
-    var teamLogoLeft: String?
+    var teamLogoLeft: String
 
     @Field
-    var teamLogoRight: String?
+    var teamLogoRight: String
 
     @Field
-    var teamScoreLeft: String?
+    var teamScoreLeft: String
 
     @Field
-    var teamScoreRight: String?
+    var teamScoreRight: String
 
     @Field
-    var teamNameLeft: String?
+    var teamNameLeft: String
 
     @Field
-    var teamNameRight: String?
+    var teamNameRight: String
   }
 
   struct LiveActivityConfig: Record {

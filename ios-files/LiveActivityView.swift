@@ -52,28 +52,22 @@ import WidgetKit
         
         HStack(alignment: .center, spacing: 8) {
         // Left team logo and name
-        if let leftLogo = contentState.teamLogoLeft {
-          VStack(spacing: 4) {
-            Image.dynamic(assetNameOrPath: leftLogo)
-              .resizable()
-              .scaledToFit()
-              .frame(width: 40, height: 40)
-            if let leftName = contentState.teamNameLeft {
-              Text(leftName)
-                .font(.caption)
-                .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
-                .multilineTextAlignment(.center)
-            }
-          }
+        VStack(spacing: 4) {
+          Image.dynamic(assetNameOrPath: contentState.teamLogoLeft)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 40, height: 40)
+          Text(contentState.teamNameLeft)
+            .font(.caption)
+            .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+            .multilineTextAlignment(.center)
         }
         
         // Left team score
-        if let leftScore = contentState.teamScoreLeft {
-          Text(leftScore)
-            .font(.title)
-            .fontWeight(.bold)
-            .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
-        }
+        Text(contentState.teamScoreLeft)
+          .font(.title)
+          .fontWeight(.bold)
+          .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
         
         Spacer()
         
@@ -85,38 +79,30 @@ import WidgetKit
             .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
             .multilineTextAlignment(.center)
           
-          if let subtitle = contentState.subtitle {
-            Text(subtitle)
-              .font(.subheadline)
-              .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
-              .multilineTextAlignment(.center)
-          }
+          Text(contentState.subtitle)
+            .font(.subheadline)
+            .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+            .multilineTextAlignment(.center)
         }
         
         Spacer()
         
         // Right team score
-        if let rightScore = contentState.teamScoreRight {
-          Text(rightScore)
-            .font(.title)
-            .fontWeight(.bold)
-            .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
-        }
+        Text(contentState.teamScoreRight)
+          .font(.title)
+          .fontWeight(.bold)
+          .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
         
         // Right team logo and name
-        if let rightLogo = contentState.teamLogoRight {
-          VStack(spacing: 4) {
-            Image.dynamic(assetNameOrPath: rightLogo)
-              .resizable()
-              .scaledToFit()
-              .frame(width: 40, height: 40)
-            if let rightName = contentState.teamNameRight {
-              Text(rightName)
-                .font(.caption)
-                .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
-                .multilineTextAlignment(.center)
-            }
-          }
+        VStack(spacing: 4) {
+          Image.dynamic(assetNameOrPath: contentState.teamLogoRight)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 40, height: 40)
+          Text(contentState.teamNameRight)
+            .font(.caption)
+            .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+            .multilineTextAlignment(.center)
         }
         }
       }

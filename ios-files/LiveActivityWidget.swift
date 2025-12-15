@@ -68,16 +68,14 @@ public struct LiveActivityWidget: Widget {
     } dynamicIsland: { context in
       DynamicIsland {
         DynamicIslandExpandedRegion(.leading, priority: 1) {
-          if let leftLogo = context.state.teamLogoLeft {
-            dynamicIslandExpandedTeamLeading(
-              teamLogo: leftLogo,
-              teamName: context.state.teamNameLeft,
-              teamScore: context.state.teamScoreLeft
-            )
-            .dynamicIsland(verticalPlacement: .belowIfTooWide)
-            .padding(.leading, 5)
-            .applyWidgetURL(from: context.attributes.deepLinkUrl)
-          }
+          dynamicIslandExpandedTeamLeading(
+            teamLogo: context.state.teamLogoLeft,
+            teamName: context.state.teamNameLeft,
+            teamScore: context.state.teamScoreLeft
+          )
+          .dynamicIsland(verticalPlacement: .belowIfTooWide)
+          .padding(.leading, 5)
+          .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
         DynamicIslandExpandedRegion(.center) {
           VStack(spacing: 2) {
@@ -85,25 +83,21 @@ public struct LiveActivityWidget: Widget {
               .font(.headline)
               .foregroundStyle(.white)
               .fontWeight(.semibold)
-            if let subtitle = context.state.subtitle {
-              Text(subtitle)
-                .font(.caption)
-                .foregroundStyle(.white.opacity(0.75))
-            }
+            Text(context.state.subtitle)
+              .font(.caption)
+              .foregroundStyle(.white.opacity(0.75))
           }
           .padding(.horizontal, 5)
           .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
         DynamicIslandExpandedRegion(.trailing) {
-          if let rightLogo = context.state.teamLogoRight {
-            dynamicIslandExpandedTeamTrailing(
-              teamLogo: rightLogo,
-              teamName: context.state.teamNameRight,
-              teamScore: context.state.teamScoreRight
-            )
-            .padding(.trailing, 5)
-            .applyWidgetURL(from: context.attributes.deepLinkUrl)
-          }
+          dynamicIslandExpandedTeamTrailing(
+            teamLogo: context.state.teamLogoRight,
+            teamName: context.state.teamNameRight,
+            teamScore: context.state.teamScoreRight
+          )
+          .padding(.trailing, 5)
+          .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
         DynamicIslandExpandedRegion(.bottom) {
           if let matchType = context.state.matchType {
@@ -115,47 +109,41 @@ public struct LiveActivityWidget: Widget {
           }
         }
       } compactLeading: {
-        if let leftLogo = context.state.teamLogoLeft {
-          ZStack {
-            Circle()
-              .fill(.white)
-              .frame(width: 26, height: 26)
-            resizableImage(imageName: leftLogo)
-              .frame(width: 23, height: 23)
-          }
-          .applyWidgetURL(from: context.attributes.deepLinkUrl)
+        ZStack {
+          Circle()
+            .fill(.white)
+            .frame(width: 26, height: 26)
+          resizableImage(imageName: context.state.teamLogoLeft)
+            .frame(width: 23, height: 23)
         }
+        .applyWidgetURL(from: context.attributes.deepLinkUrl)
       } compactTrailing: {
-        if let rightLogo = context.state.teamLogoRight {
+        ZStack {
+          Circle()
+            .fill(.white)
+            .frame(width: 26, height: 26)
+          resizableImage(imageName: context.state.teamLogoRight)
+            .frame(width: 23, height: 23)
+        }
+        .applyWidgetURL(from: context.attributes.deepLinkUrl)
+      } minimal: {
+        VStack(spacing: 2) {
           ZStack {
             Circle()
               .fill(.white)
-              .frame(width: 26, height: 26)
-            resizableImage(imageName: rightLogo)
-              .frame(width: 23, height: 23)
+              .frame(width: 18, height: 18)
+            resizableImage(imageName: context.state.teamLogoLeft)
+              .frame(width: 16, height: 16)
           }
-          .applyWidgetURL(from: context.attributes.deepLinkUrl)
-        }
-      } minimal: {
-        if let leftLogo = context.state.teamLogoLeft, let rightLogo = context.state.teamLogoRight {
-          VStack(spacing: 2) {
-            ZStack {
-              Circle()
-                .fill(.white)
-                .frame(width: 18, height: 18)
-              resizableImage(imageName: leftLogo)
-                .frame(width: 16, height: 16)
-            }
-            ZStack {
-              Circle()
-                .fill(.white)
-                .frame(width: 18, height: 18)
-              resizableImage(imageName: rightLogo)
-                .frame(width: 16, height: 16)
-            }
+          ZStack {
+            Circle()
+              .fill(.white)
+              .frame(width: 18, height: 18)
+            resizableImage(imageName: context.state.teamLogoRight)
+              .frame(width: 16, height: 16)
           }
-          .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
+        .applyWidgetURL(from: context.attributes.deepLinkUrl)
       }
     }
   }
@@ -164,8 +152,8 @@ public struct LiveActivityWidget: Widget {
 
   private func dynamicIslandExpandedTeamLeading(
     teamLogo: String,
-    teamName: String?,
-    teamScore: String?
+    teamName: String,
+    teamScore: String
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
       VStack(spacing: 4) {
@@ -176,34 +164,28 @@ public struct LiveActivityWidget: Widget {
           resizableImage(imageName: teamLogo)
             .frame(width: 30, height: 30)
         }
-        if let name = teamName {
-          Text(name)
-            .font(.caption)
-            .foregroundStyle(.white.opacity(0.75))
-            .multilineTextAlignment(.center)
-        }
+        Text(teamName)
+          .font(.caption)
+          .foregroundStyle(.white.opacity(0.75))
+          .multilineTextAlignment(.center)
       }
-      if let score = teamScore {
-        Text(score)
-          .font(.title)
-          .fontWeight(.bold)
-          .foregroundStyle(.white)
-      }
+      Text(teamScore)
+        .font(.title)
+        .fontWeight(.bold)
+        .foregroundStyle(.white)
     }
   }
 
   private func dynamicIslandExpandedTeamTrailing(
     teamLogo: String,
-    teamName: String?,
-    teamScore: String?
+    teamName: String,
+    teamScore: String
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
-      if let score = teamScore {
-        Text(score)
-          .font(.title)
-          .fontWeight(.bold)
-          .foregroundStyle(.white)
-      }
+      Text(teamScore)
+        .font(.title)
+        .fontWeight(.bold)
+        .foregroundStyle(.white)
       VStack(spacing: 4) {
         ZStack {
           Circle()
@@ -212,12 +194,10 @@ public struct LiveActivityWidget: Widget {
           resizableImage(imageName: teamLogo)
             .frame(width: 30, height: 30)
         }
-        if let name = teamName {
-          Text(name)
-            .font(.caption)
-            .foregroundStyle(.white.opacity(0.75))
-            .multilineTextAlignment(.center)
-        }
+        Text(teamName)
+          .font(.caption)
+          .foregroundStyle(.white.opacity(0.75))
+          .multilineTextAlignment(.center)
       }
     }
   }

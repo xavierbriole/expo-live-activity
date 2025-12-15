@@ -6,7 +6,7 @@ import { Button, Keyboard, ScrollView, StyleSheet, Text, TextInput, View } from 
 export default function CreateLiveActivityScreen() {
   const [activityId, setActivityID] = useState<string | null>()
   const [title, setTitle] = useState('LEC Week 1')
-  const [subtitle, setSubtitle] = useState('Best of 3')
+  const [subtitle, setSubtitle] = useState('Game 1 in progress')
   const [matchType, setMatchType] = useState('Best of 5')
   const [teamLogoLeft, setTeamLogoLeft] = useState('team-left')
   const [teamLogoRight, setTeamLogoRight] = useState('team-right')
@@ -23,7 +23,7 @@ export default function CreateLiveActivityScreen() {
     const state: LiveActivityState = {
       title,
       subtitle,
-      matchType: matchType || undefined,
+      matchType,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -44,7 +44,7 @@ export default function CreateLiveActivityScreen() {
     const state: LiveActivityState = {
       title,
       subtitle,
-      matchType: matchType || undefined,
+      matchType,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -64,7 +64,7 @@ export default function CreateLiveActivityScreen() {
     const state: LiveActivityState = {
       title,
       subtitle,
-      matchType: matchType || undefined,
+      matchType,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -97,7 +97,7 @@ export default function CreateLiveActivityScreen() {
         <TextInput
           style={styles.input}
           onChangeText={setSubtitle}
-          placeholder="e.g., Best of 3"
+          placeholder="e.g., Game 1 in progress"
           value={subtitle}
           testID="input-subtitle"
         />
