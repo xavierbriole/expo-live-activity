@@ -13,7 +13,7 @@ export type WidgetFiles = {
 export function getWidgetFiles(targetPath: string) {
   let packagePath
   try {
-    packagePath = path.dirname(require.resolve('expo-live-activity/package.json'))
+    packagePath = path.dirname(require.resolve('@xavierbriole/expo-live-activity/package.json'))
   } catch {
     console.log('Building for example app')
   }
