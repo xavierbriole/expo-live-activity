@@ -10,7 +10,7 @@ public class ExpoLiveActivityModule: Module {
     var subtitle: String
 
     @Field
-    var matchType: String?
+    var matchType: String
 
     @Field
     var teamLogoLeft: String

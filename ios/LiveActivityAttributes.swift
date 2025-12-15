@@ -5,7 +5,7 @@ struct LiveActivityAttributes: ActivityAttributes {
   struct ContentState: Codable, Hashable {
     var title: String
     var subtitle: String
-    var matchType: String?
+    var matchType: String
     var teamLogoLeft: String
     var teamLogoRight: String
     var teamScoreLeft: String

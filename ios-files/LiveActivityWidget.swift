@@ -6,7 +6,7 @@ public struct LiveActivityAttributes: ActivityAttributes {
   public struct ContentState: Codable, Hashable {
     var title: String
     var subtitle: String
-    var matchType: String?
+    var matchType: String
     var teamLogoLeft: String
     var teamLogoRight: String
     var teamScoreLeft: String
@@ -17,7 +17,7 @@ public struct LiveActivityAttributes: ActivityAttributes {
     public init(
       title: String,
       subtitle: String,
-      matchType: String? = nil,
+      matchType: String,
       teamLogoLeft: String,
       teamLogoRight: String,
       teamScoreLeft: String,
@@ -102,33 +102,35 @@ public struct LiveActivityWidget: Widget {
           .padding(.trailing, 5)
           .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
-        DynamicIslandExpandedRegion(.bottom) {
-          if let matchType = context.state.matchType {
-            Text(matchType)
-              .font(.caption)
-              .foregroundStyle(.white.opacity(0.75))
-              .padding(.top, 5)
-              .applyWidgetURL(from: context.attributes.deepLinkUrl)
-          } else {
-            EmptyView()
-          }
-        }
+
       } compactLeading: {
-        ZStack {
-          Circle()
-            .fill(.white)
-            .frame(width: 26, height: 26)
-          resizableImage(imageName: context.state.teamLogoLeft)
-            .frame(width: 23, height: 23)
+        HStack(spacing: 4) {
+          ZStack {
+            Circle()
+              .fill(.white)
+              .frame(width: 26, height: 26)
+            resizableImage(imageName: context.state.teamLogoLeft)
+              .frame(width: 23, height: 23)
+          }
+          Text(context.state.teamScoreLeft)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(.white)
         }
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
       } compactTrailing: {
-        ZStack {
-          Circle()
-            .fill(.white)
-            .frame(width: 26, height: 26)
-          resizableImage(imageName: context.state.teamLogoRight)
-            .frame(width: 23, height: 23)
+        HStack(spacing: 4) {
+          Text(context.state.teamScoreRight)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(.white)
+          ZStack {
+            Circle()
+              .fill(.white)
+              .frame(width: 26, height: 26)
+            resizableImage(imageName: context.state.teamLogoRight)
+              .frame(width: 23, height: 23)
+          }
         }
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
       } minimal: {
