@@ -54,6 +54,7 @@ import WidgetKit
               Text(leftName)
                 .font(.caption)
                 .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+                .multilineTextAlignment(.center)
             }
           }
         }
@@ -105,6 +106,7 @@ import WidgetKit
               Text(rightName)
                 .font(.caption)
                 .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+                .multilineTextAlignment(.center)
             }
           }
         }
