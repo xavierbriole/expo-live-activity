@@ -10,23 +10,6 @@ public class ExpoLiveActivityModule: Module {
     var subtitle: String?
 
     @Field
-    var progressBar: ProgressBar?
-
-    struct ProgressBar: Record {
-      @Field
-      var date: Double?
-
-      @Field
-      var progress: Double?
-    }
-
-    @Field
-    var imageName: String?
-
-    @Field
-    var dynamicIslandImageName: String?
-
-    @Field
     var teamLogoLeft: String?
 
     @Field
@@ -37,6 +20,12 @@ public class ExpoLiveActivityModule: Module {
 
     @Field
     var teamScoreRight: String?
+
+    @Field
+    var teamNameLeft: String?
+
+    @Field
+    var teamNameRight: String?
   }
 
   struct LiveActivityConfig: Record {
@@ -50,57 +39,7 @@ public class ExpoLiveActivityModule: Module {
     var subtitleColor: String?
 
     @Field
-    var progressViewTint: String?
-
-    @Field
-    var progressViewLabelColor: String?
-
-    @Field
     var deepLinkUrl: String?
-
-    @Field
-    var timerType: DynamicIslandTimerType?
-
-    @Field
-    var padding: Int?
-
-    @Field
-    var paddingDetails: PaddingDetails?
-
-    @Field
-    var imagePosition: String?
-
-    @Field
-    var imageWidth: Int?
-
-    @Field
-    var imageHeight: Int?
-
-    @Field
-    var imageWidthPercent: Double?
-
-    @Field
-    var imageHeightPercent: Double?
-
-    @Field
-    var imageAlign: String?
-
-    @Field
-    var contentFit: String?
-
-    struct PaddingDetails: Record {
-      @Field var top: Int?
-      @Field var bottom: Int?
-      @Field var left: Int?
-      @Field var right: Int?
-      @Field var vertical: Int?
-      @Field var horizontal: Int?
-    }
-  }
-
-  enum DynamicIslandTimerType: String, Enumerable {
-    case circular
-    case digital
   }
 
   @available(iOS 16.1, *)
@@ -141,14 +80,6 @@ public class ExpoLiveActivityModule: Module {
   private func updateImages(
     state: LiveActivityState, newState: inout LiveActivityAttributes.ContentState
   ) async throws {
-    if let name = state.imageName {
-      newState.imageName = try await resolveImage(from: name)
-    }
-
-    if let name = state.dynamicIslandImageName {
-      newState.dynamicIslandImageName = try await resolveImage(from: name)
-    }
-
     if let name = state.teamLogoLeft {
       newState.teamLogoLeft = try await resolveImage(from: name)
     }
@@ -248,37 +179,16 @@ public class ExpoLiveActivityModule: Module {
           backgroundColor: config.backgroundColor,
           titleColor: config.titleColor,
           subtitleColor: config.subtitleColor,
-          progressViewTint: config.progressViewTint,
-          progressViewLabelColor: config.progressViewLabelColor,
-          deepLinkUrl: config.deepLinkUrl,
-          timerType: config.timerType == .digital ? .digital : .circular,
-          padding: config.padding,
-          paddingDetails: config.paddingDetails.map {
-            LiveActivityAttributes.PaddingDetails(
-              top: $0.top,
-              bottom: $0.bottom,
-              left: $0.left,
-              right: $0.right,
-              vertical: $0.vertical,
-              horizontal: $0.horizontal
-            )
-          },
-          imagePosition: config.imagePosition,
-          imageWidth: config.imageWidth,
-          imageHeight: config.imageHeight,
-          imageWidthPercent: config.imageWidthPercent,
-          imageHeightPercent: config.imageHeightPercent,
-          imageAlign: config.imageAlign,
-          contentFit: config.contentFit
+          deepLinkUrl: config.deepLinkUrl
         )
 
         let initialState = LiveActivityAttributes.ContentState(
           title: state.title,
           subtitle: state.subtitle,
-          timerEndDateInMilliseconds: state.progressBar?.date,
-          progress: state.progressBar?.progress,
           teamScoreLeft: state.teamScoreLeft,
-          teamScoreRight: state.teamScoreRight
+          teamScoreRight: state.teamScoreRight,
+          teamNameLeft: state.teamNameLeft,
+          teamNameRight: state.teamNameRight
         )
 
         let activity = try Activity.request(
@@ -313,10 +223,10 @@ public class ExpoLiveActivityModule: Module {
         var newState = LiveActivityAttributes.ContentState(
           title: state.title,
           subtitle: state.subtitle,
-          timerEndDateInMilliseconds: state.progressBar?.date,
-          progress: state.progressBar?.progress,
           teamScoreLeft: state.teamScoreLeft,
-          teamScoreRight: state.teamScoreRight
+          teamScoreRight: state.teamScoreRight,
+          teamNameLeft: state.teamNameLeft,
+          teamNameRight: state.teamNameRight
         )
         try await updateImages(state: state, newState: &newState)
         await activity.end(
@@ -342,10 +252,10 @@ public class ExpoLiveActivityModule: Module {
         var newState = LiveActivityAttributes.ContentState(
           title: state.title,
           subtitle: state.subtitle,
-          timerEndDateInMilliseconds: state.progressBar?.date,
-          progress: state.progressBar?.progress,
           teamScoreLeft: state.teamScoreLeft,
-          teamScoreRight: state.teamScoreRight
+          teamScoreRight: state.teamScoreRight,
+          teamNameLeft: state.teamNameLeft,
+          teamNameRight: state.teamNameRight
         )
         try await updateImages(state: state, newState: &newState)
         await activity.update(ActivityContent(state: newState, staleDate: nil))
