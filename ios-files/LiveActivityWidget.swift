@@ -105,6 +105,15 @@ public struct LiveActivityWidget: Widget {
             .applyWidgetURL(from: context.attributes.deepLinkUrl)
           }
         }
+        DynamicIslandExpandedRegion(.bottom) {
+          if let matchType = context.state.matchType {
+            Text(matchType)
+              .font(.caption)
+              .foregroundStyle(.white.opacity(0.75))
+              .padding(.top, 5)
+              .applyWidgetURL(from: context.attributes.deepLinkUrl)
+          }
+        }
       } compactLeading: {
         if let leftLogo = context.state.teamLogoLeft {
           ZStack {

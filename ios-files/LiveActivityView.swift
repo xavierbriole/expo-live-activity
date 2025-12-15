@@ -42,7 +42,15 @@ import WidgetKit
       let defaultPadding = 16
       let padding = CGFloat(defaultPadding)
 
-      HStack(alignment: .center, spacing: 8) {
+      VStack(spacing: 8) {
+        // Match type label at the top (e.g., "Best of 5")
+        if let matchType = contentState.matchType {
+          Text(matchType)
+            .font(.caption)
+            .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
+        }
+        
+        HStack(alignment: .center, spacing: 8) {
         // Left team logo and name
         if let leftLogo = contentState.teamLogoLeft {
           VStack(spacing: 4) {
@@ -109,6 +117,7 @@ import WidgetKit
                 .multilineTextAlignment(.center)
             }
           }
+        }
         }
       }
       .padding(padding)

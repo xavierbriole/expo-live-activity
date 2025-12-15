@@ -7,6 +7,7 @@ export default function CreateLiveActivityScreen() {
   const [activityId, setActivityID] = useState<string | null>()
   const [title, setTitle] = useState('LEC Week 1')
   const [subtitle, setSubtitle] = useState('Best of 3')
+  const [matchType, setMatchType] = useState('Best of 5')
   const [teamLogoLeft, setTeamLogoLeft] = useState('team-left')
   const [teamLogoRight, setTeamLogoRight] = useState('team-right')
   const [teamScoreLeft, setTeamScoreLeft] = useState('0')
@@ -22,6 +23,7 @@ export default function CreateLiveActivityScreen() {
     const state: LiveActivityState = {
       title,
       subtitle,
+      matchType: matchType || undefined,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -42,6 +44,7 @@ export default function CreateLiveActivityScreen() {
     const state: LiveActivityState = {
       title,
       subtitle,
+      matchType: matchType || undefined,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -61,6 +64,7 @@ export default function CreateLiveActivityScreen() {
     const state: LiveActivityState = {
       title,
       subtitle,
+      matchType: matchType || undefined,
       teamLogoLeft,
       teamLogoRight,
       teamScoreLeft,
@@ -96,6 +100,14 @@ export default function CreateLiveActivityScreen() {
           placeholder="e.g., Best of 3"
           value={subtitle}
           testID="input-subtitle"
+        />
+
+        <Text style={styles.label}>Match Type (optional):</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setMatchType}
+          placeholder="e.g., Best of 5 (leave empty for Bo1)"
+          value={matchType}
         />
 
         <View style={styles.section}>

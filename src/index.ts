@@ -8,6 +8,7 @@ type Voidable<T> = T | void
 export type LiveActivityState = {
   title: string
   subtitle?: string
+  matchType?: string
   teamLogoLeft?: string
   teamLogoRight?: string
   teamScoreLeft?: string
@@ -19,6 +20,7 @@ export type LiveActivityState = {
 export type NativeLiveActivityState = {
   title: string
   subtitle?: string
+  matchType?: string
   teamLogoLeft?: string
   teamLogoRight?: string
   teamScoreLeft?: string

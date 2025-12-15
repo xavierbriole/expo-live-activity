@@ -10,6 +10,9 @@ public class ExpoLiveActivityModule: Module {
     var subtitle: String?
 
     @Field
+    var matchType: String?
+
+    @Field
     var teamLogoLeft: String?
 
     @Field
@@ -185,6 +188,7 @@ public class ExpoLiveActivityModule: Module {
         let initialState = LiveActivityAttributes.ContentState(
           title: state.title,
           subtitle: state.subtitle,
+          matchType: state.matchType,
           teamScoreLeft: state.teamScoreLeft,
           teamScoreRight: state.teamScoreRight,
           teamNameLeft: state.teamNameLeft,
@@ -223,6 +227,7 @@ public class ExpoLiveActivityModule: Module {
         var newState = LiveActivityAttributes.ContentState(
           title: state.title,
           subtitle: state.subtitle,
+          matchType: state.matchType,
           teamScoreLeft: state.teamScoreLeft,
           teamScoreRight: state.teamScoreRight,
           teamNameLeft: state.teamNameLeft,
@@ -252,6 +257,7 @@ public class ExpoLiveActivityModule: Module {
         var newState = LiveActivityAttributes.ContentState(
           title: state.title,
           subtitle: state.subtitle,
+          matchType: state.matchType,
           teamScoreLeft: state.teamScoreLeft,
           teamScoreRight: state.teamScoreRight,
           teamNameLeft: state.teamNameLeft,
