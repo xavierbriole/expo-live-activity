@@ -158,7 +158,7 @@ public struct LiveActivityWidget: Widget {
     teamName: String?,
     teamScore: String?
   ) -> some View {
-    VStack(spacing: 8) {
+    HStack(alignment: .center, spacing: 8) {
       VStack(spacing: 4) {
         ZStack {
           Circle()
@@ -187,7 +187,13 @@ public struct LiveActivityWidget: Widget {
     teamName: String?,
     teamScore: String?
   ) -> some View {
-    VStack(spacing: 8) {
+    HStack(alignment: .center, spacing: 8) {
+      if let score = teamScore {
+        Text(score)
+          .font(.title)
+          .fontWeight(.bold)
+          .foregroundStyle(.white)
+      }
       VStack(spacing: 4) {
         ZStack {
           Circle()
@@ -201,12 +207,6 @@ public struct LiveActivityWidget: Widget {
             .font(.caption)
             .foregroundStyle(.white.opacity(0.75))
         }
-      }
-      if let score = teamScore {
-        Text(score)
-          .font(.title)
-          .fontWeight(.bold)
-          .foregroundStyle(.white)
       }
     }
   }
