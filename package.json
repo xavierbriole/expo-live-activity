@@ -1,6 +1,6 @@
 {
   "name": "@xavierbriole/expo-live-activity",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A module for adding Live Activity to a React Native app for iOS.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
