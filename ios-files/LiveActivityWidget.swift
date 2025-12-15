@@ -109,6 +109,8 @@ public struct LiveActivityWidget: Widget {
               .foregroundStyle(.white.opacity(0.75))
               .padding(.top, 5)
               .applyWidgetURL(from: context.attributes.deepLinkUrl)
+          } else {
+            EmptyView()
           }
         }
       } compactLeading: {

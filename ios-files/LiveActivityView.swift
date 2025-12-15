@@ -42,7 +42,7 @@ import WidgetKit
       let defaultPadding = 16
       let padding = CGFloat(defaultPadding)
 
-      VStack(spacing: 8) {
+      VStack(spacing: contentState.matchType != nil ? 8 : 0) {
         // Match type label at the top (e.g., "Best of 5")
         if let matchType = contentState.matchType {
           Text(matchType)
