@@ -1,15 +1,7 @@
 import type { LiveActivityConfig, LiveActivityState } from 'expo-live-activity'
 import * as LiveActivity from 'expo-live-activity'
 import { useState } from 'react'
-import {
-  Button,
-  Keyboard,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native'
+import { Button, Keyboard, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 
 export default function CreateLiveActivityScreen() {
   const [activityId, setActivityID] = useState<string | null>()
@@ -108,7 +100,7 @@ export default function CreateLiveActivityScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Left Team</Text>
-          
+
           <Text style={styles.label}>Team Logo (asset name):</Text>
           <TextInput
             style={styles.input}
@@ -138,7 +130,7 @@ export default function CreateLiveActivityScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Right Team</Text>
-          
+
           <Text style={styles.label}>Team Logo (asset name):</Text>
           <TextInput
             style={styles.input}
