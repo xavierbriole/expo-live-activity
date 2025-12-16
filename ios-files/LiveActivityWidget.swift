@@ -102,7 +102,6 @@ public struct LiveActivityWidget: Widget {
           .padding(.trailing, 5)
           .applyWidgetURL(from: context.attributes.deepLinkUrl)
         }
-
       } compactLeading: {
         HStack(spacing: 4) {
           ZStack {
@@ -111,18 +110,17 @@ public struct LiveActivityWidget: Widget {
               .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoLeft)
               .frame(width: 23, height: 23)
+              .clipShape(Circle())
           }
           Text(context.state.teamScoreLeft)
-            .font(.caption)
-            .fontWeight(.semibold)
+            .font(.largeTitle.weight(.bold).width(.compressed))
             .foregroundStyle(.white)
         }
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
       } compactTrailing: {
         HStack(spacing: 4) {
           Text(context.state.teamScoreRight)
-            .font(.caption)
-            .fontWeight(.semibold)
+            .font(.largeTitle.weight(.bold).width(.compressed))
             .foregroundStyle(.white)
           ZStack {
             Circle()
@@ -130,24 +128,27 @@ public struct LiveActivityWidget: Widget {
               .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoRight)
               .frame(width: 23, height: 23)
+              .clipShape(Circle())
           }
         }
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
       } minimal: {
-        VStack(spacing: 2) {
+        HStack(spacing: -12) {
           ZStack {
             Circle()
               .fill(.white)
-              .frame(width: 18, height: 18)
+              .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoLeft)
-              .frame(width: 16, height: 16)
+              .frame(width: 23, height: 23)
+              .clipShape(Circle())
           }
           ZStack {
             Circle()
               .fill(.white)
-              .frame(width: 18, height: 18)
+              .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoRight)
-              .frame(width: 16, height: 16)
+              .frame(width: 23, height: 23)
+              .clipShape(Circle())
           }
         }
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
@@ -170,6 +171,7 @@ public struct LiveActivityWidget: Widget {
             .frame(width: 34, height: 34)
           resizableImage(imageName: teamLogo)
             .frame(width: 30, height: 30)
+            .clipShape(Circle())
         }
         Text(teamName)
           .font(.caption)
@@ -177,8 +179,7 @@ public struct LiveActivityWidget: Widget {
           .multilineTextAlignment(.center)
       }
       Text(teamScore)
-        .font(.title)
-        .fontWeight(.bold)
+        .font(.largeTitle.weight(.bold).width(.compressed))
         .foregroundStyle(.white)
     }
   }
@@ -190,8 +191,7 @@ public struct LiveActivityWidget: Widget {
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
       Text(teamScore)
-        .font(.title)
-        .fontWeight(.bold)
+        .font(.largeTitle.weight(.bold).width(.compressed))
         .foregroundStyle(.white)
       VStack(spacing: 4) {
         ZStack {
@@ -200,6 +200,7 @@ public struct LiveActivityWidget: Widget {
             .frame(width: 34, height: 34)
           resizableImage(imageName: teamLogo)
             .frame(width: 30, height: 30)
+            .clipShape(Circle())
         }
         Text(teamName)
           .font(.caption)

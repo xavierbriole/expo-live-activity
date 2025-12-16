@@ -60,8 +60,7 @@ import WidgetKit
         }
         
         Text(contentState.teamScoreLeft)
-          .font(.title)
-          .fontWeight(.bold)
+          .font(.largeTitle.weight(.bold).width(.compressed))
           .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
         
         Spacer()
@@ -82,8 +81,7 @@ import WidgetKit
         Spacer()
         
         Text(contentState.teamScoreRight)
-          .font(.title)
-          .fontWeight(.bold)
+          .font(.largeTitle.weight(.bold).width(.compressed))
           .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
         
         VStack(spacing: 4) {
