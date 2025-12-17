@@ -19,10 +19,10 @@ public class ExpoLiveActivityModule: Module {
     var teamLogoRight: String
 
     @Field
-    var teamScoreLeft: String
+    var teamScoreLeft: Int
 
     @Field
-    var teamScoreRight: String
+    var teamScoreRight: Int
 
     @Field
     var teamNameLeft: String

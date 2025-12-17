@@ -11,8 +11,8 @@ export type LiveActivityState = {
   subtitle: string
   teamLogoLeft: string
   teamLogoRight: string
-  teamScoreLeft: string
-  teamScoreRight: string
+  teamScoreLeft: number
+  teamScoreRight: number
   teamNameLeft: string
   teamNameRight: string
 }
@@ -23,8 +23,8 @@ export type NativeLiveActivityState = {
   subtitle: string
   teamLogoLeft: string
   teamLogoRight: string
-  teamScoreLeft: string
-  teamScoreRight: string
+  teamScoreLeft: number
+  teamScoreRight: number
   teamNameLeft: string
   teamNameRight: string
 }

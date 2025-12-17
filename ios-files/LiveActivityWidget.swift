@@ -9,8 +9,8 @@ public struct LiveActivityAttributes: ActivityAttributes {
     var subtitle: String
     var teamLogoLeft: String
     var teamLogoRight: String
-    var teamScoreLeft: String
-    var teamScoreRight: String
+    var teamScoreLeft: Int
+    var teamScoreRight: Int
     var teamNameLeft: String
     var teamNameRight: String
 
@@ -20,8 +20,8 @@ public struct LiveActivityAttributes: ActivityAttributes {
       subtitle: String,
       teamLogoLeft: String,
       teamLogoRight: String,
-      teamScoreLeft: String,
-      teamScoreRight: String,
+      teamScoreLeft: Int,
+      teamScoreRight: Int,
       teamNameLeft: String,
       teamNameRight: String
     ) {
@@ -61,7 +61,7 @@ public struct LiveActivityAttributes: ActivityAttributes {
 @available(iOS 16.1, *)
 public struct LiveActivityWidget: Widget {
   public var body: some WidgetConfiguration {
-    ActivityConfiguration(for: LiveActivityAttributes.self) { context in
+    let config = ActivityConfiguration(for: LiveActivityAttributes.self) { context in
       LiveActivityView(contentState: context.state, attributes: context.attributes)
         .activityBackgroundTint(
           context.attributes.backgroundColor.map { Color(hex: $0) }
@@ -112,15 +112,15 @@ public struct LiveActivityWidget: Widget {
               .frame(width: 23, height: 23)
               .clipShape(Circle())
           }
-          Text(context.state.teamScoreLeft)
-            .font(.largeTitle.weight(.bold).width(.compressed))
+          Text(context.state.teamScoreLeft, format: .number)
+            .font(.system(size: 28).weight(.bold).width(.compressed))
             .foregroundStyle(.white)
         }
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
       } compactTrailing: {
         HStack(spacing: 4) {
-          Text(context.state.teamScoreRight)
-            .font(.largeTitle.weight(.bold).width(.compressed))
+          Text(context.state.teamScoreRight, format: .number)
+            .font(.system(size: 28).weight(.bold).width(.compressed))
             .foregroundStyle(.white)
           ZStack {
             Circle()
@@ -154,6 +154,12 @@ public struct LiveActivityWidget: Widget {
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
       }
     }
+    
+    if #available(iOS 18.0, *) {
+      return config.supplementalActivityFamilies([.small, .medium])
+    } else {
+      return config
+    }
   }
 
   public init() {}
@@ -161,7 +167,7 @@ public struct LiveActivityWidget: Widget {
   private func dynamicIslandExpandedTeamLeading(
     teamLogo: String,
     teamName: String,
-    teamScore: String
+    teamScore: Int
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
       VStack(spacing: 4) {
@@ -178,7 +184,7 @@ public struct LiveActivityWidget: Widget {
           .foregroundStyle(.white.opacity(0.75))
           .multilineTextAlignment(.center)
       }
-      Text(teamScore)
+      Text(teamScore, format: .number)
         .font(.largeTitle.weight(.bold).width(.compressed))
         .foregroundStyle(.white)
     }
@@ -187,10 +193,10 @@ public struct LiveActivityWidget: Widget {
   private func dynamicIslandExpandedTeamTrailing(
     teamLogo: String,
     teamName: String,
-    teamScore: String
+    teamScore: Int
   ) -> some View {
     HStack(alignment: .center, spacing: 8) {
-      Text(teamScore)
+      Text(teamScore, format: .number)
         .font(.largeTitle.weight(.bold).width(.compressed))
         .foregroundStyle(.white)
       VStack(spacing: 4) {

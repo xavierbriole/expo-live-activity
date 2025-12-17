@@ -8,8 +8,8 @@ struct LiveActivityAttributes: ActivityAttributes {
     var subtitle: String
     var teamLogoLeft: String
     var teamLogoRight: String
-    var teamScoreLeft: String
-    var teamScoreRight: String
+    var teamScoreLeft: Int
+    var teamScoreRight: Int
     var teamNameLeft: String
     var teamNameRight: String
   }

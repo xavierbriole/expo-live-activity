@@ -1,7 +1,9 @@
 import type { LiveActivityConfig, LiveActivityState } from 'expo-live-activity'
 import * as LiveActivity from 'expo-live-activity'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Button, Keyboard, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+
+const toNum = (v: string) => (v === '' ? 0 : parseInt(v, 10))
 
 export default function CreateLiveActivityScreen() {
   const [activityId, setActivityID] = useState<string | null>()
@@ -18,6 +20,10 @@ export default function CreateLiveActivityScreen() {
   const activityIdState = activityId ? `Activity ID: ${activityId}` : 'No active activity'
   console.log(activityIdState)
 
+  const onChangeNumeric = useCallback((text: string, setter: (val: string) => void) => {
+    if (/^\d*$/.test(text)) setter(text)
+  }, [])
+
   const startActivity = () => {
     Keyboard.dismiss()
     const state: LiveActivityState = {
@@ -26,8 +32,8 @@ export default function CreateLiveActivityScreen() {
       subtitle,
       teamLogoLeft,
       teamLogoRight,
-      teamScoreLeft,
-      teamScoreRight,
+      teamScoreLeft: toNum(teamScoreLeft),
+      teamScoreRight: toNum(teamScoreRight),
       teamNameLeft,
       teamNameRight,
     }
@@ -47,8 +53,8 @@ export default function CreateLiveActivityScreen() {
       subtitle,
       teamLogoLeft,
       teamLogoRight,
-      teamScoreLeft,
-      teamScoreRight,
+      teamScoreLeft: toNum(teamScoreLeft),
+      teamScoreRight: toNum(teamScoreRight),
       teamNameLeft,
       teamNameRight,
     }
@@ -67,8 +73,8 @@ export default function CreateLiveActivityScreen() {
       subtitle,
       teamLogoLeft,
       teamLogoRight,
-      teamScoreLeft,
-      teamScoreRight,
+      teamScoreLeft: toNum(teamScoreLeft),
+      teamScoreRight: toNum(teamScoreRight),
       teamNameLeft,
       teamNameRight,
     }
@@ -107,9 +113,9 @@ export default function CreateLiveActivityScreen() {
           <Text style={styles.label}>Score:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={setTeamScoreLeft}
-            value={teamScoreLeft}
+            onChangeText={(t) => onChangeNumeric(t, setTeamScoreLeft)}
             keyboardType="number-pad"
+            value={teamScoreLeft}
           />
         </View>
 
@@ -125,9 +131,9 @@ export default function CreateLiveActivityScreen() {
           <Text style={styles.label}>Score:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={setTeamScoreRight}
-            value={teamScoreRight}
+            onChangeText={(t) => onChangeNumeric(t, setTeamScoreRight)}
             keyboardType="number-pad"
+            value={teamScoreRight}
           />
         </View>
 
@@ -160,7 +166,7 @@ export default function CreateLiveActivityScreen() {
 }
 
 const baseActivityConfig: LiveActivityConfig = {
-  backgroundColor: '001A72',
+  backgroundColor: '1E3A8A',
   titleColor: 'EBEBF0',
   subtitleColor: '#FFFFFF75',
   deepLinkUrl: '/dashboard',
