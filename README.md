@@ -135,8 +135,8 @@ The `state` object should include:
   subtitle: string
   teamLogoLeft: string
   teamLogoRight: string
-  teamScoreLeft: string
-  teamScoreRight: string
+  teamScoreLeft: number
+  teamScoreRight: number
   teamNameLeft: string
   teamNameRight: string
 }
@@ -170,8 +170,8 @@ const state: LiveActivity.LiveActivityState = {
   subtitle: 'Game 1 in progress',
   teamLogoLeft: 't1', // name of the image in assets/liveActivity folder
   teamLogoRight: 'g2', // name of the image in assets/liveActivity folder
-  teamScoreLeft: '2',
-  teamScoreRight: '3',
+  teamScoreLeft: 2,
+  teamScoreRight: 3,
   teamNameLeft: 'T1',
   teamNameRight: 'G2',
 }
@@ -233,8 +233,8 @@ Example payload for starting Live Activity:
       "subtitle": "Game 1 in progress",
       "teamLogoLeft": "t1",
       "teamLogoRight": "g2",
-      "teamScoreLeft": "2",
-      "teamScoreRight": "3",
+      "teamScoreLeft": 2,
+      "teamScoreRight": 3,
       "teamNameLeft": "T1",
       "teamNameRight": "G2"
     },
@@ -268,8 +268,8 @@ Example payload for updating Live Activity:
       "subtitle": "T1 won game 1 in 17:32",
       "teamLogoLeft": "t1",
       "teamLogoRight": "g2",
-      "teamScoreLeft": "2",
-      "teamScoreRight": "3",
+      "teamScoreLeft": 2,
+      "teamScoreRight": 3,
       "teamNameLeft": "T1",
       "teamNameRight": "G2"
     },
