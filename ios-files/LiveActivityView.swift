@@ -40,11 +40,26 @@ import WidgetKit
 
     var body: some View {
       if #available(iOS 18.0, *) {
-        ViewThatFits {
-          PhoneLayoutView(contentState: contentState, attributes: attributes)
-          WatchLayoutView(contentState: contentState, attributes: attributes)
-        }
+        AdaptiveActivityView(contentState: contentState, attributes: attributes)
       } else {
+        PhoneLayoutView(contentState: contentState, attributes: attributes)
+      }
+    }
+  }
+  
+  @available(iOS 18.0, *)
+  struct AdaptiveActivityView: View {
+    @Environment(\.activityFamily) var activityFamily
+    let contentState: LiveActivityAttributes.ContentState
+    let attributes: LiveActivityAttributes
+    
+    var body: some View {
+      switch activityFamily {
+      case .small:
+        WatchLayoutView(contentState: contentState, attributes: attributes)
+      case .medium:
+        PhoneLayoutView(contentState: contentState, attributes: attributes)
+      @unknown default:
         PhoneLayoutView(contentState: contentState, attributes: attributes)
       }
     }
