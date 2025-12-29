@@ -54,6 +54,7 @@ export function addXCConfigurationList(
     SWIFT_OPTIMIZATION_LEVEL: `"-Onone"`,
     CODE_SIGN_ENTITLEMENTS: `"${targetName}/${targetName}.entitlements"`,
     APPLICATION_EXTENSION_API_ONLY: '"YES"',
+    ASSETCATALOG_COMPILER_APPICON_NAME: '"AppIcon"',
     // DEVELOPMENT_TEAM: `"G76836P2D4"`,
   }
 
