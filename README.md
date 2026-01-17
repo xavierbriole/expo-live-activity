@@ -278,6 +278,43 @@ Example payload for updating Live Activity:
 }
 ```
 
+## Contributing
+
+### Syncing with Upstream
+
+This repository is a fork of [software-mansion-labs/expo-live-activity](https://github.com/software-mansion-labs/expo-live-activity). To sync with upstream updates:
+
+1. **Fetch the latest changes from upstream:**
+
+   ```bash
+   gitup
+   ```
+
+2. **Merge upstream with selective file choice:**
+
+   ```bash
+   git merge upstream/main --no-commit --no-ff
+   ```
+
+3. **To keep your version of a conflicting file:**
+
+   ```bash
+   git checkout --ours <file>
+   ```
+
+4. **To keep the upstream version of a file:**
+
+   ```bash
+   git checkout --theirs <file>
+   ```
+
+5. **Add resolved files and finalize the merge:**
+   ```bash
+   git add .
+   git commit --no-edit
+   git push origin main
+   ```
+
 ## expo-live-activity is created by Software Mansion
 
 [![swm](https://logo.swmansion.com/logo?color=white&variant=desktop&width=150&tag=typegpu-github 'Software Mansion')](https://swmansion.com)
