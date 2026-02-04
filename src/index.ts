@@ -30,7 +30,8 @@ export type NativeLiveActivityState = {
 }
 
 export type LiveActivityConfig = {
-  backgroundColor?: string
+  gradientStartColor?: string
+  gradientEndColor?: string
   titleColor?: string
   subtitleColor?: string
   deepLinkUrl?: string

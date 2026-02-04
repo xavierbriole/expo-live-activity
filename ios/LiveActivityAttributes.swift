@@ -15,7 +15,8 @@ struct LiveActivityAttributes: ActivityAttributes {
   }
 
   var name: String
-  var backgroundColor: String?
+  var gradientStartColor: String?
+  var gradientEndColor: String?
   var titleColor: String?
   var subtitleColor: String?
   var deepLinkUrl: String?

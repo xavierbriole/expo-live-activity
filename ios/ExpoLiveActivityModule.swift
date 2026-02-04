@@ -33,7 +33,10 @@ public class ExpoLiveActivityModule: Module {
 
   struct LiveActivityConfig: Record {
     @Field
-    var backgroundColor: String?
+    var gradientStartColor: String?
+
+    @Field
+    var gradientEndColor: String?
 
     @Field
     var titleColor: String?
@@ -174,7 +177,8 @@ public class ExpoLiveActivityModule: Module {
 
         let attributes = LiveActivityAttributes(
           name: "ExpoLiveActivity",
-          backgroundColor: config.backgroundColor,
+          gradientStartColor: config.gradientStartColor,
+          gradientEndColor: config.gradientEndColor,
           titleColor: config.titleColor,
           subtitleColor: config.subtitleColor,
           deepLinkUrl: config.deepLinkUrl

@@ -38,20 +38,23 @@ public struct LiveActivityAttributes: ActivityAttributes {
   }
 
   var name: String
-  var backgroundColor: String?
+  var gradientStartColor: String?
+  var gradientEndColor: String?
   var titleColor: String?
   var subtitleColor: String?
   var deepLinkUrl: String?
 
   public init(
     name: String,
-    backgroundColor: String? = nil,
+    gradientStartColor: String? = nil,
+    gradientEndColor: String? = nil,
     titleColor: String? = nil,
     subtitleColor: String? = nil,
     deepLinkUrl: String? = nil
   ) {
     self.name = name
-    self.backgroundColor = backgroundColor
+    self.gradientStartColor = gradientStartColor
+    self.gradientEndColor = gradientEndColor
     self.titleColor = titleColor
     self.subtitleColor = subtitleColor
     self.deepLinkUrl = deepLinkUrl
@@ -63,9 +66,17 @@ public struct LiveActivityWidget: Widget {
   public var body: some WidgetConfiguration {
     let config = ActivityConfiguration(for: LiveActivityAttributes.self) { context in
       LiveActivityView(contentState: context.state, attributes: context.attributes)
-        .activityBackgroundTint(
-          context.attributes.backgroundColor.map { Color(hex: $0) }
+        .background(
+          LinearGradient(
+            gradient: Gradient(colors: [
+              context.attributes.gradientStartColor.map { Color(hex: $0) } ?? Color(hex: "000000CC"),
+              context.attributes.gradientEndColor.map { Color(hex: $0) } ?? Color(hex: "000000CC")
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+          )
         )
+        .activityBackgroundTint(.clear)
         .activitySystemActionForegroundColor(Color.black)
         .applyWidgetURL(from: context.attributes.deepLinkUrl)
     } dynamicIsland: { context in

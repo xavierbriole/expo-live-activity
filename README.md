@@ -148,7 +148,8 @@ The `config` object should include:
 
 ```typescript
 {
-   backgroundColor?: string;
+   gradientStartColor?: string;
+   gradientEndColor?: string;
    titleColor?: string;
    subtitleColor?: string;
    deepLinkUrl?: string;
@@ -177,9 +178,10 @@ const state: LiveActivity.LiveActivityState = {
 }
 
 const config: LiveActivity.LiveActivityConfig = {
-  backgroundColor: '#FFFFFF',
-  titleColor: '#000000',
-  subtitleColor: '#333333',
+  gradientStartColor: '#3D5A96',
+  gradientEndColor: '#8E4560',
+  titleColor: '#EBEBF0',
+  subtitleColor: '#FFFFFF75',
   deepLinkUrl: '/match',
 }
 
@@ -242,7 +244,8 @@ Example payload for starting Live Activity:
     "attributes-type": "LiveActivityAttributes",
     "attributes": {
       "name": "1839783", // matchId
-      "backgroundColor": "001A72",
+      "gradientStartColor": "3D5A96",
+      "gradientEndColor": "8E4560",
       "titleColor": "EBEBF0",
       "subtitleColor": "FFFFFF75",
       "deepLinkUrl": "/match"

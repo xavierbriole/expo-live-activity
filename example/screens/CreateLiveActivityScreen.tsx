@@ -166,8 +166,9 @@ export default function CreateLiveActivityScreen() {
 }
 
 const baseActivityConfig: LiveActivityConfig = {
-  backgroundColor: '1E3A8A',
-  titleColor: 'EBEBF0',
+  gradientStartColor: '#3D5A96CC',
+  gradientEndColor: '#8E4560CC',
+  titleColor: '#EBEBF0',
   subtitleColor: '#FFFFFF75',
   deepLinkUrl: '/dashboard',
 }
