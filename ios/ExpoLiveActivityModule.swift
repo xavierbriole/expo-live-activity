@@ -149,6 +149,11 @@ public class ExpoLiveActivityModule: Module {
       ?? false
   }
 
+  private var silentOnUnsupportedOS: Bool {
+    Bundle.main.object(forInfoDictionaryKey: "ExpoLiveActivity_SilentOnUnsupportedOS") as? Bool
+      ?? false
+  }
+
   public func definition() -> ModuleDefinition {
     Name("ExpoLiveActivity")
 
@@ -165,8 +170,13 @@ public class ExpoLiveActivityModule: Module {
     Events("onTokenReceived", "onPushToStartTokenReceived", "onStateChange")
 
     Function("startActivity") {
-      (state: LiveActivityState, maybeConfig: LiveActivityConfig?) -> String in
-      guard #available(iOS 16.2, *) else { throw UnsupportedOSException("16.2") }
+      (state: LiveActivityState, maybeConfig: LiveActivityConfig?, relevanceScore: Double?) -> String in
+      guard #available(iOS 16.2, *) else {
+        if silentOnUnsupportedOS {
+          return ""
+        }
+        throw UnsupportedOSException("16.2")
+      }
 
       guard ActivityAuthorizationInfo().areActivitiesEnabled else {
         throw LiveActivitiesNotEnabledException()
@@ -198,14 +208,14 @@ public class ExpoLiveActivityModule: Module {
 
         let activity = try Activity.request(
           attributes: attributes,
-          content: .init(state: initialState, staleDate: nil),
+          content: .init(state: initialState, staleDate: nil, relevanceScore: relevanceScore ?? 0.0),
           pushType: pushNotificationsEnabled ? .token : nil
         )
 
         Task {
           var newState = activity.content.state
           try await updateImages(state: state, newState: &newState)
-          await activity.update(ActivityContent(state: newState, staleDate: nil))
+          await activity.update(ActivityContent(state: newState, staleDate: nil, relevanceScore: relevanceScore ?? 0.5))
         }
 
         return activity.id
@@ -214,8 +224,13 @@ public class ExpoLiveActivityModule: Module {
       }
     }
 
-    Function("stopActivity") { (activityId: String, state: LiveActivityState) in
-      guard #available(iOS 16.2, *) else { throw UnsupportedOSException("16.2") }
+    Function("stopActivity") { (activityId: String, state: LiveActivityState, relevanceScore: Double?) in
+      guard #available(iOS 16.2, *) else {
+        if silentOnUnsupportedOS {
+          return
+        }
+        throw UnsupportedOSException("16.2")
+      }
 
       guard
         let activity = Activity<LiveActivityAttributes>.activities.first(where: {
@@ -238,14 +253,17 @@ public class ExpoLiveActivityModule: Module {
         )
         try await updateImages(state: state, newState: &newState)
         await activity.end(
-          ActivityContent(state: newState, staleDate: nil),
+          ActivityContent(state: newState, staleDate: nil, relevanceScore: relevanceScore ?? 0.5),
           dismissalPolicy: .immediate
         )
       }
     }
 
-    Function("updateActivity") { (activityId: String, state: LiveActivityState) in
+    Function("updateActivity") { (activityId: String, state: LiveActivityState, relevanceScore: Double?) in
       guard #available(iOS 16.2, *) else {
+        if silentOnUnsupportedOS {
+          return
+        }
         throw UnsupportedOSException("16.2")
       }
 
@@ -269,7 +287,7 @@ public class ExpoLiveActivityModule: Module {
           teamNameRight: state.teamNameRight
         )
         try await updateImages(state: state, newState: &newState)
-        await activity.update(ActivityContent(state: newState, staleDate: nil))
+        await activity.update(ActivityContent(state: newState, staleDate: nil, relevanceScore: relevanceScore ?? 0.5))
       }
     }
   }
