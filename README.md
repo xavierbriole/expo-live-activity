@@ -315,6 +315,27 @@ The `example/` folder contains a standalone Expo app used to develop and test th
 
 If you change the module's native (`ios/`) or plugin (`plugin/`) source, re-run `npx expo prebuild --clean` in `example/` to pick up the changes.
 
+### Publishing a new version
+
+The [scripts/publish.sh](scripts/publish.sh) script automates version bumping, tagging and publishing to GitHub Packages:
+
+```sh
+./scripts/publish.sh [patch|minor|major]
+```
+
+By default it bumps the `patch` version. Running it will:
+
+1. Check that the repository has no uncommitted changes (aborts otherwise).
+2. Warn if you're not on `main`/`master`, asking for confirmation to continue.
+3. Bump the version in `package.json` with `npm version` (without creating a git tag).
+4. Commit the version bump (`chore: bump version to X.Y.Z`).
+5. Create a `vX.Y.Z` git tag.
+6. Push the current branch and the new tag to `origin`.
+7. Publish the package to GitHub Packages with `npm publish`.
+
+> [!NOTE]
+> `npm publish` relies on your local npm configuration being authenticated against GitHub Packages.
+
 ### Syncing with Upstream
 
 This repository is a fork of [software-mansion-labs/expo-live-activity](https://github.com/software-mansion-labs/expo-live-activity). To sync with upstream updates:
