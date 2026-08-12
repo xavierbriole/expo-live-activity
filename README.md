@@ -283,6 +283,38 @@ Example payload for updating Live Activity:
 
 ## Contributing
 
+### Running the example app locally
+
+The `example/` folder contains a standalone Expo app used to develop and test the module. Since this module isn't supported in Expo Go, you need to build a custom dev client.
+
+1. **Install dependencies at the repo root and in the example app:**
+
+   ```sh
+   npm install
+   cd example
+   npm install
+   ```
+
+2. **Generate the native iOS project and build the dev client:**
+
+   ```sh
+   npx expo prebuild --clean
+   npx expo run:ios
+   ```
+
+   This compiles the app with the `expo-live-activity` native module included and installs/launches it on an iOS simulator.
+
+3. **For subsequent runs**, once the dev client is built, you can just start the Metro bundler:
+
+   ```sh
+   npx expo start
+   ```
+
+> [!WARNING]
+> Always run these commands from inside the `example/` folder. Running `expo prebuild`/`expo run:ios` from the repo root will overwrite the module's native source files in `ios/`.
+
+If you change the module's native (`ios/`) or plugin (`plugin/`) source, re-run `npx expo prebuild --clean` in `example/` to pick up the changes.
+
 ### Syncing with Upstream
 
 This repository is a fork of [software-mansion-labs/expo-live-activity](https://github.com/software-mansion-labs/expo-live-activity). To sync with upstream updates:
