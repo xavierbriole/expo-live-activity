@@ -11,11 +11,11 @@ export default function CreateLiveActivityScreen() {
   const [title, setTitle] = useState('BO5')
   const [subtitle, setSubtitle] = useState('Game 1 in progress')
   const [teamLogoLeft, setTeamLogoLeft] = useState('t1')
-  const [teamLogoRight, setTeamLogoRight] = useState('g2')
+  const [teamLogoRight, setTeamLogoRight] = useState('karmine-corp')
   const [teamScoreLeft, setTeamScoreLeft] = useState('0')
   const [teamScoreRight, setTeamScoreRight] = useState('0')
   const [teamNameLeft, setTeamNameLeft] = useState('T1')
-  const [teamNameRight, setTeamNameRight] = useState('G2')
+  const [teamNameRight, setTeamNameRight] = useState('KC')
 
   const activityIdState = activityId ? `Activity ID: ${activityId}` : 'No active activity'
   console.log(activityIdState)

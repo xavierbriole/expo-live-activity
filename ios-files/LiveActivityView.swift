@@ -75,18 +75,19 @@ import WidgetKit
     let attributes: LiveActivityAttributes
     
     var body: some View {
-      VStack(spacing: 8) {
+      VStack(spacing: 6) {
         Text(contentState.caption)
           .font(.caption)
+          .fontWeight(.semibold)
           .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
           .lineLimit(1)
         
         HStack(alignment: .center, spacing: 8) {
-          VStack(spacing: 4) {
+          VStack(spacing: 2) {
             Image.dynamic(assetNameOrPath: contentState.teamLogoLeft)
               .resizable()
               .scaledToFit()
-              .frame(width: 40, height: 40)
+              .frame(width: 32, height: 32)
             Text(contentState.teamNameLeft)
               .font(.caption)
               .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
@@ -121,11 +122,11 @@ import WidgetKit
             .font(.largeTitle.weight(.bold).width(.compressed))
             .modifier(ConditionalForegroundViewModifier(color: attributes.titleColor))
           
-          VStack(spacing: 4) {
+          VStack(spacing: 2) {
             Image.dynamic(assetNameOrPath: contentState.teamLogoRight)
               .resizable()
               .scaledToFit()
-              .frame(width: 40, height: 40)
+              .frame(width: 32, height: 32)
             Text(contentState.teamNameRight)
               .font(.caption)
               .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
@@ -133,7 +134,7 @@ import WidgetKit
           }
         }
       }
-      .padding(16)
+      .padding(12)
     }
   }
   

@@ -120,7 +120,8 @@ public struct LiveActivityWidget: Widget {
               .fill(.white)
               .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoLeft)
-              .frame(width: 23, height: 23)
+              .frame(width: 18, height: 18)
+              .frame(width: 26, height: 26)
               .clipShape(Circle())
           }
           Text(context.state.teamScoreLeft, format: .number)
@@ -138,7 +139,8 @@ public struct LiveActivityWidget: Widget {
               .fill(.white)
               .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoRight)
-              .frame(width: 23, height: 23)
+              .frame(width: 18, height: 18)
+              .frame(width: 26, height: 26)
               .clipShape(Circle())
           }
         }
@@ -150,7 +152,8 @@ public struct LiveActivityWidget: Widget {
               .fill(.white)
               .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoLeft)
-              .frame(width: 23, height: 23)
+              .frame(width: 18, height: 18)
+              .frame(width: 26, height: 26)
               .clipShape(Circle())
           }
           ZStack {
@@ -158,7 +161,8 @@ public struct LiveActivityWidget: Widget {
               .fill(.white)
               .frame(width: 26, height: 26)
             resizableImage(imageName: context.state.teamLogoRight)
-              .frame(width: 23, height: 23)
+              .frame(width: 18, height: 18)
+              .frame(width: 26, height: 26)
               .clipShape(Circle())
           }
         }
@@ -187,7 +191,8 @@ public struct LiveActivityWidget: Widget {
             .fill(.white)
             .frame(width: 34, height: 34)
           resizableImage(imageName: teamLogo)
-            .frame(width: 30, height: 30)
+            .frame(width: 24, height: 24)
+            .frame(width: 34, height: 34)
             .clipShape(Circle())
         }
         Text(teamName)
@@ -216,7 +221,8 @@ public struct LiveActivityWidget: Widget {
             .fill(.white)
             .frame(width: 34, height: 34)
           resizableImage(imageName: teamLogo)
-            .frame(width: 30, height: 30)
+            .frame(width: 24, height: 24)
+            .frame(width: 34, height: 34)
             .clipShape(Circle())
         }
         Text(teamName)
