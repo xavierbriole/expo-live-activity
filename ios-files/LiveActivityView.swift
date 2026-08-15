@@ -144,8 +144,9 @@ import WidgetKit
     
     var body: some View {
       VStack(spacing: 4) {
-        Text(contentState.caption)
+        Text(contentState.shortCaption)
           .font(.caption)
+          .fontWeight(.semibold)
           .modifier(ConditionalForegroundViewModifier(color: attributes.subtitleColor))
         
         HStack(alignment: .center, spacing: 8) {

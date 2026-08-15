@@ -131,6 +131,7 @@ The `state` object should include:
 ```typescript
 {
   caption: string
+  shortCaption: string
   title: string
   subtitle: string
   teamLogoLeft: string
@@ -166,15 +167,16 @@ Managing a Live Activity:
 
 ```typescript
 const state: LiveActivity.LiveActivityState = {
-  caption: 'LEC Week 1',
+  caption: 'Nexus League Summer 2026 • Regular Season',
+  shortCaption: 'Nexus League',
   title: 'BO5',
   subtitle: 'Game 1 in progress',
   teamLogoLeft: 't1', // name of the image in assets/liveActivity folder
-  teamLogoRight: 'g2', // name of the image in assets/liveActivity folder
+  teamLogoRight: 'karmine-corp', // name of the image in assets/liveActivity folder
   teamScoreLeft: 2,
   teamScoreRight: 3,
   teamNameLeft: 'T1',
-  teamNameRight: 'G2',
+  teamNameRight: 'KC',
 }
 
 const config: LiveActivity.LiveActivityConfig = {
@@ -230,15 +232,16 @@ Example payload for starting Live Activity:
   "aps": {
     "event": "start",
     "content-state": {
-      "caption": "LEC Week 1",
+      "caption": "Nexus League Summer 2026 • Regular Season",
+      "shortCaption": "Nexus League",
       "title": "BO5",
       "subtitle": "Game 1 in progress",
       "teamLogoLeft": "t1",
-      "teamLogoRight": "g2",
+      "teamLogoRight": "karmine-corp",
       "teamScoreLeft": 2,
       "teamScoreRight": 3,
       "teamNameLeft": "T1",
-      "teamNameRight": "G2"
+      "teamNameRight": "KC"
     },
     "timestamp": 1754491435000, // timestamp of when the push notification was sent
     "attributes-type": "LiveActivityAttributes",
@@ -266,15 +269,16 @@ Example payload for updating Live Activity:
   "aps": {
     "event": "update",
     "content-state": {
-      "caption": "LEC Week 1",
+      "caption": "Nexus League Summer 2026 • Regular Season",
+      "shortCaption": "Nexus League",
       "title": "BO5",
       "subtitle": "T1 won game 1 in 17:32",
       "teamLogoLeft": "t1",
-      "teamLogoRight": "g2",
+      "teamLogoRight": "karmine-corp",
       "teamScoreLeft": 2,
       "teamScoreRight": 3,
       "teamNameLeft": "T1",
-      "teamNameRight": "G2"
+      "teamNameRight": "KC"
     },
     "timestamp": 1754063621319 // timestamp of when the push notification was sent
   }

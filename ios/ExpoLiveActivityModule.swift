@@ -7,6 +7,9 @@ public class ExpoLiveActivityModule: Module {
     var caption: String
 
     @Field
+    var shortCaption: String
+
+    @Field
     var title: String
 
     @Field
@@ -196,6 +199,7 @@ public class ExpoLiveActivityModule: Module {
 
         let initialState = LiveActivityAttributes.ContentState(
           caption: state.caption,
+          shortCaption: state.shortCaption,
           title: state.title,
           subtitle: state.subtitle,
           teamLogoLeft: state.teamLogoLeft,
@@ -242,6 +246,7 @@ public class ExpoLiveActivityModule: Module {
         print("Stopping activity with id: \(activityId)")
         var newState = LiveActivityAttributes.ContentState(
           caption: state.caption,
+          shortCaption: state.shortCaption,
           title: state.title,
           subtitle: state.subtitle,
           teamLogoLeft: state.teamLogoLeft,
@@ -277,6 +282,7 @@ public class ExpoLiveActivityModule: Module {
         print("Updating activity with id: \(activityId)")
         var newState = LiveActivityAttributes.ContentState(
           caption: state.caption,
+          shortCaption: state.shortCaption,
           title: state.title,
           subtitle: state.subtitle,
           teamLogoLeft: state.teamLogoLeft,

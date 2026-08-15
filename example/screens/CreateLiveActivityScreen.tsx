@@ -7,7 +7,8 @@ const toNum = (v: string) => (v === '' ? 0 : parseInt(v, 10))
 
 export default function CreateLiveActivityScreen() {
   const [activityId, setActivityID] = useState<string | null>()
-  const [caption, setCaption] = useState('LEC Week 1')
+  const [caption, setCaption] = useState('Nexus League Summer 2026 • Regular Season')
+  const [shortCaption, setShortCaption] = useState('Nexus League')
   const [title, setTitle] = useState('BO5')
   const [subtitle, setSubtitle] = useState('Game 1 in progress')
   const [teamLogoLeft, setTeamLogoLeft] = useState('t1')
@@ -28,6 +29,7 @@ export default function CreateLiveActivityScreen() {
     Keyboard.dismiss()
     const state: LiveActivityState = {
       caption,
+      shortCaption,
       title,
       subtitle,
       teamLogoLeft,
@@ -49,6 +51,7 @@ export default function CreateLiveActivityScreen() {
   const stopActivity = () => {
     const state: LiveActivityState = {
       caption,
+      shortCaption,
       title,
       subtitle,
       teamLogoLeft,
@@ -69,6 +72,7 @@ export default function CreateLiveActivityScreen() {
   const updateActivity = () => {
     const state: LiveActivityState = {
       caption,
+      shortCaption,
       title,
       subtitle,
       teamLogoLeft,
@@ -93,6 +97,14 @@ export default function CreateLiveActivityScreen() {
         <View style={styles.section}>
           <Text style={styles.label}>Caption:</Text>
           <TextInput style={styles.input} onChangeText={setCaption} value={caption} testID="input-caption" />
+
+          <Text style={styles.label}>Short Caption:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setShortCaption}
+            value={shortCaption}
+            testID="input-short-caption"
+          />
 
           <Text style={styles.label}>Title:</Text>
           <TextInput style={styles.input} onChangeText={setTitle} value={title} testID="input-title" />
@@ -143,6 +155,7 @@ export default function CreateLiveActivityScreen() {
             onPress={startActivity}
             disabled={
               caption === '' ||
+              shortCaption === '' ||
               title === '' ||
               subtitle === '' ||
               teamLogoLeft === '' ||

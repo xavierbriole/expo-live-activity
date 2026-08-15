@@ -4,6 +4,7 @@ import Foundation
 struct LiveActivityAttributes: ActivityAttributes {
   struct ContentState: Codable, Hashable {
     var caption: String
+    var shortCaption: String
     var title: String
     var subtitle: String
     var teamLogoLeft: String

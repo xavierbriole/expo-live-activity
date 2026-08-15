@@ -5,6 +5,7 @@ import WidgetKit
 public struct LiveActivityAttributes: ActivityAttributes {
   public struct ContentState: Codable, Hashable {
     var caption: String
+    var shortCaption: String
     var title: String
     var subtitle: String
     var teamLogoLeft: String
@@ -16,6 +17,7 @@ public struct LiveActivityAttributes: ActivityAttributes {
 
     public init(
       caption: String,
+      shortCaption: String,
       title: String,
       subtitle: String,
       teamLogoLeft: String,
@@ -26,6 +28,7 @@ public struct LiveActivityAttributes: ActivityAttributes {
       teamNameRight: String
     ) {
       self.caption = caption
+      self.shortCaption = shortCaption
       self.title = title
       self.subtitle = subtitle
       self.teamLogoLeft = teamLogoLeft

@@ -7,6 +7,7 @@ type Voidable<T> = T | void
 
 export type LiveActivityState = {
   caption: string
+  shortCaption: string
   title: string
   subtitle: string
   teamLogoLeft: string
@@ -19,6 +20,7 @@ export type LiveActivityState = {
 
 export type NativeLiveActivityState = {
   caption: string
+  shortCaption: string
   title: string
   subtitle: string
   teamLogoLeft: string
